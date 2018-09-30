@@ -22,3 +22,7 @@ buildNumber.properties
 ### Example user template template
 ### Example user template
 
+.gitignore
+mvnw
+mvnw.cmd
+pom.xml

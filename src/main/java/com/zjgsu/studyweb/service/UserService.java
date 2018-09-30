@@ -24,4 +24,16 @@ public class UserService {
         return userMapper.selectOne(wrapper);
     }
 
+    public Integer addUser(User discuss) {
+        return userMapper.insert(discuss);
+    }
+
+    public Integer updateUser(User discuss) {
+        return userMapper.updateById(discuss);
+    }
+
+    public Integer deleteUserById(long id) {
+        return userMapper.deleteById(id);
+    }
+
 }
