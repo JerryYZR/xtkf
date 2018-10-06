@@ -45,6 +45,15 @@ public class DiscussService {
         return discussesList;
     }
 
+    public List<Discuss> getDiscussesByCreateUserId(Long create_userId) {
+        List<Discuss> discussesList = new ArrayList<>();
+        QueryWrapper<Discuss> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("create_userId", create_userId);
+        discussesList = discussMapper.selectList(queryWrapper);
+
+        return discussesList;
+    }
+
     public Integer addDiscuss(Discuss discuss) {
         return discussMapper.insert(discuss);
     }

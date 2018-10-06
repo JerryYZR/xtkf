@@ -12,4 +12,5 @@ public class Discuss {
     private String name;
     private LocalDateTime create_time;
     private Integer heat;
+    private Long create_userId;
 }

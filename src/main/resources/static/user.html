@@ -54,76 +54,73 @@
                                     <p>发邀请链接给好友，或分享微博/QQ群等，好友注册，你们各得3个智慧豆！</p>
                                     <p>
                                         <strong>邀请链接：</strong>
-                                        <input disabled class="form-control disabled invite-user-link" value="http://www.zhike.com/register?">
+                                        <input disabled class="form-control disabled invite-user-link" value="http://www.zhike.com/register">
                                     </p>
-                                    <button class="btn btn-default invite-user-btn" data-clipboard-text="我正在实验楼撸代码，你也快来！800+编程实战教程，无需搭环境，直接练习！用我的链接注册，你我都能获得3个实验豆！http://www.shiyanlou.com/register?inviter=NTY0MzE5ODUwNDIw">复制</button>
+                                    <button class="btn btn-default invite-user-btn" data-clipboard-text="我正在实验楼撸代码，你也快来！800+编程实战教程，无需搭环境，直接练习！用我的链接注册，你我都能获得3个实验豆！http://www.zhike.com/register">复制</button>
                                     <br>
                                     <br>
                                     <div class="invite-user-msg"></div>
                                 </div>
                                 <div class="side-footer">
                                     <span>分享到：</span>
-                                    <a class="invite-qq" href="#"><img src="https://static.shiyanlou.com/img/invite-qq.png"></a>
-                                    <a class="invite-qz" href="#"><img src="https://static.shiyanlou.com/img/invite-qz.png"></a>
-                                    <a class="invite-weibo" href="#"><img src="https://static.shiyanlou.com/img/invite-weibo.png"></a>
+                                    <a class="invite-qq" href="#"><img src="image/invite-qq.png"></a>
+                                    <a class="invite-qz" href="#"><img src="image/invite-qz.png"></a>
+                                    <a class="invite-weibo" href="#"><img src="image/invite-weibo.png"></a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-9 layout-body">
                             <div class="content">
-                                <ul class="nav nav-tabs" rolw="tablist">
+                                <ul class="nav nav-tabs" rolw="tablist" id="nav_user">
                                     <li role="presentation">
-                                        <a href="/user/837745/study" role="tab">课程</a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a href="/user/837745/learn_path" role="tab">路径</a>
+                                        <a id="nav_course">课程</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="/user/837745/reports" role="tab">报告</a>
-                                    </li>
-                                    <li role="presentation" class="active">
-                                        <a href="/user/837745/questions" role="tab">讨论</a>
-                                    </li>
-
-                                    <li role="presentation">
-                                        <a href="/user/837745/contests" role="tab">比赛</a>
+                                        <a id="nav_path">路径</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="/user/837745/library" role="tab">教程</a>
+                                        <a id="nav_discuss">讨论</a>
                                     </li>
-                                    <li role="presentation">
-                                        <a href="/user/837745/trylab" role="tab">软件</a>
+                                    <li role="presentation" >
+                                        <a id="nav_system">系统通知</a>
                                     </li>
-
-                                    <!--         <li role="presentation" >
-                                                <a href="/user/message" role="tab">系统通知</a>
-                                            </li> -->
-                                    <!--         <li role="presentation" >
-                                                <a href="/user/profile" role="tab">个人设置</a>
-                                            </li> -->
-
-
+                                    <li role="presentation" >
+                                        <a id="nav_setting">个人设置</a>
+                                    </li>
                                 </ul>
 
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active">
+                                    <div  id="courses" class="tab-pane active">
+                                        <ul class="row question-items"></ul>
+                                    </div>
+                                    <div  id="paths" class="tab-pane active">
+                                        <ul class="row question-items"></ul>
+                                    </div>
+                                    <div  id="discusses" class="tab-pane active">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <a href="/user/837745/questions">
-                                                    <span class="label label-default">话题</span>
+                                                <a>
+                                                    <span id="topic" class="label">话题</span>
                                                 </a>
                                                 <a>
-                                                    <span class="label label-success">回复</span>
+                                                    <span id="response" class="label">回复</span>
                                                 </a>
-                                                <a href="/user/837745/favorite">
-                                                    <span class="label label-default">收藏</span>
+                                                <a>
+                                                    <span id="collection" class="label">收藏</span>
                                                 </a>
                                             </div>
                                         </div>
 
-
-                                        <ul id="discusses" class="row question-items"></ul>
+                                        <ul id="discuss_topic_items" class="row question-items"></ul>
+                                        <ul id="discuss_response_items" class="row question-items"></ul>
+                                        <ul id="discuss_collection_items" class="row question-items"></ul>
+                                    </div>
+                                    <div  id="systems" class="tab-pane active">
+                                        <ul class="row question-items"></ul>
+                                    </div>
+                                    <div  id="settings" class="tab-pane active">
+                                        <ul class="row question-items"></ul>
                                     </div>
                                 </div>
                             </div>

@@ -24,9 +24,14 @@ public class DiscussController {
         return discussService.getDiscussById(id);
     }
 
-    @RequestMapping(value = "/user/discusses", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/discusses/userId", method = RequestMethod.POST)
     public List<Discuss> getDiscussesByUserId(@RequestParam long id) {
         return discussService.getDiscussesByUserId(id);
+    }
+
+    @RequestMapping(value = "/user/discusses/createUserId", method = RequestMethod.POST)
+    public List<Discuss> getDiscussesByCreateUserId(@RequestParam long id) {
+        return discussService.getDiscussesByCreateUserId(id);
     }
 
     @RequestMapping(value = "/addDiscuss", method = RequestMethod.POST)
