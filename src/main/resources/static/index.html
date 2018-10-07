@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>知识互换平台</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="alternate icon" type="image/png" href="vendor/bootstrap/images/favicon.png">
+    <link rel='icon' href='favicon.ico' type='image/x-ico' />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="vendor/bootstrap/css/default.min.css?t=227" />
+    <link href='vendor/bootstrap/css/csdn_feed.css' rel='stylesheet' />
+    <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="vendor/bootstrap/css/font-awesome.min.css">
+
+
+
+
+    <link rel="stylesheet" href="vendor/bootstrap/css/shiyan.css">
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script type="text/javascript" src="vendor/bootstrap/lib/jquery/jquery.min.js"></script>
+    <!--<![endif]-->
+    <!--[if lte IE 8 ]>
+    <script src="vendor/bootstrap/lib/amazeui/amazeui.ie8polyfill.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="vendor/bootstrap/lib/handlebars/handlebars.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/lib/iscroll/iscroll-probe.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/lib/amazeui/amazeui.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/lib/raty/jquery.raty.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/js/main.min.js?t=1"></script>
+
+</head>
+<body>
+<header class="hd">
+    <div class="hd-top am-hide-md-down">
+        <div class="cg">
+            <div class="hd-top-left">
+                <a href="#">知客</a>
+            </div>
+            <div class="hd-top-right">
+                <div id="userinfo"></div>
+                <!--<a href="register.html">注册</a>-->
+                <!--<a href="login.html">登录</a>-->
+            </div>
+        </div>
+    </div>
+    <div class="cg">
+        <div class="hd-search">
+
+            <div class="hd-search-left">
+                <!--
+                    <a href="../index.html"><img class="am-hide-md-down" src="./imapath_logologo.jpg" /></a>
+                    <a href="../index.html"><img class="am-show-md-down" src="./imapath_logologo-sm.jpg" /></a>
+                -->
+                <h2>假装这里是知识互换平台logo</h2>
+            </div>
+
+            <div class="hd-search-right am-hide-md-down">
+                <div class="hd-search-right-input">
+                    <input type="text" name="name" value="" placeholder="搜索 课程/路径" onclick="search()" id="key"/>
+                    <button class="font am-show-md-down">&#xe634;</button>
+                </div>
+                <div class="hd-search-right-keyword">
+                    <a href="#">java</a>
+                    <a href="#">python</a>
+                    <a href="#">前端</a>
+                    <a href="#">后端</a>
+                    <a href="#">ai</a>
+                </div>
+            </div>
+
+
+            <button class="am-show-md-down font f-btn" id="hd_botton" type="button" data-am-modal="{target: '#my-modal'}">&#xe68b;</button>
+        </div>
+    </div>
+
+
+    <div class="hd-bottom">
+        <div class="cg">
+            <div class="hd-bottom-category am-hide-md-down">
+                <h1><a href="javascript:;">全部课程</a><i data-am-collapse="{target: '.banner-collapse'}">&#xe78f;</i></h1>
+            </div>
+            <div class="hd-bottom-nav" id="my-modal">
+                <h1 class="am-show-md-down"><input type="text" name="name" value="" placeholder="请输入关键字" /><em class="font">&#xe6e7;</em><i data-am-modal="{target: '#my-modal'}">&#xe607;</i></h1>
+                <ul>
+                    <li class="on"><a href="index.html">首页</a></li>
+                    <li><a href="">路径</a></li>
+                    <li><a href="#">论坛</a></li>
+                    <li><a href="#">课程</a></li>
+                    <li><a href="#">个人主页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="am-cf"></div>
+<div class="am-slider am-slider-default index-lunbo" data-am-flexslider="{playAfterPaused: 8000}">
+    <ul class="am-slides">
+        <li><img src="vendor/bootstrap/images/index_banner01.jpg" /></li>
+        <li><img src="vendor/bootstrap/images/index_banner01.jpg" /></li>
+        <li><img src="vendor/bootstrap/images/index_banner01.jpg" /></li>
+    </ul>
+
+    <div class="banner-slide am-hide-md-down">
+        <div class="cg">
+            <ul class="category">
+                <div id="courselist"></div>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container clearfix">
+
+    <div class="fixed_content">
+        <h3 class="feed_new_tit">
+            <span class="line"></span><a class="txt">热门讨论组</a>
+        </h3>
+        <main>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active">
+
+                    <ul class="question-items" id="discusstmp">
+
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+        <aside>
+
+            <!-- 右侧轮播广告 end -->
+            <div class="right_box">
+                <h3 class="feed_new_tit">
+                    <span class="line"></span><a class="txt">热门路径</a>
+                </h3>
+                <div class="feed_company csdn-tracking-statistics" data-mod="popu_474" data-dsm="post">
+                    <div class="sidebox-body course-content side-list-body">
+                        <div id="pathtmp"></div>
+                        <!--<a href="/paths/python"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25"> Python 研发工程师</a>-->
+                        <!--<a href="/paths/bigdata"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513926288.png?imageView/1/w/25/h/25"> 大数据工程师</a>-->
+                        <!--<a href="/paths/cpp"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513793360.png?imageView/1/w/25/h/25"> C++ 研发工程师</a>-->
+                        <!--<a href="/paths/security"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513867033.png?imageView/1/w/25/h/25"> 信息安全工程师</a>-->
+                        <!--<a href="/paths/linuxsys"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471514004752.png?imageView/1/w/25/h/25"> Linux 运维工程师</a>-->
+                    </div>
+
+                </div>
+            </div>
+            <div class="right_box">
+                <h3 class="feed_new_tit">
+                    <span class="line"></span><a class="txt">热门课程</a>
+                </h3>
+                <div class="feed_company csdn-tracking-statistics" data-mod="popu_474" data-dsm="post">
+                    <div class="sidebox-body course-content side-list-body">
+                        <div id="coursetmp"></div>
+                        <!--<a href="/paths/python"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25"> Python 研发工程师</a>-->
+                        <!--<a href="/paths/bigdata"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513926288.png?imageView/1/w/25/h/25"> 大数据工程师</a>-->
+                        <!--<a href="/paths/cpp"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513793360.png?imageView/1/w/25/h/25"> C++ 研发工程师</a>-->
+                        <!--<a href="/paths/security"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513867033.png?imageView/1/w/25/h/25"> 信息安全工程师</a>-->
+                        <!--<a href="/paths/linuxsys"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471514004752.png?imageView/1/w/25/h/25"> Linux 运维工程师</a>-->
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </aside>
+    </div>
+</div>
+
+<script src="vendor/bootstrap/js/util.js"></script>
+<script>
+
+
+    show_discuss();
+    show_path();
+    show_course();
+
+    //获取用户session
+    var user= JSON.parse(sessionStorage.getItem("user"));//将json转换为对象
+    //sessionStorage.removeItem("user");
+
+    var tmp='';
+    if(user==null){
+        tmp+='<a href="register.html">注册</a> <a href="login.html">登录</a>';
+        document.getElementById("userinfo").innerHTML=tmp;
+    }
+    else{
+        tmp+='<a href="">欢迎！ '+user.username+'</a> <a href="login.html">退出</a>';
+        document.getElementById("userinfo").innerHTML=tmp;
+    }
+
+
+    /**
+     * 获取全部路径
+     */
+    var re=getResponse("/path/getPathList");
+    var coursetmp=''
+    for(var i=0;i<re.responseJSON.length;i++){
+        coursetmp+='<li><a href="#">'+re.responseJSON[i].name+'</a></li>'; //url 地址 还未赋值
+    }
+    document.getElementById("courselist").innerHTML=coursetmp;
+
+    /**
+     * 退出
+     */
+
+
+
+    /**
+     * 获取所有讨论组
+     */
+    function show_discuss() {
+        var re = getResponse("/discuss/discussesbyhot");
+        var discusstmp = '';
+        for (var i = 0; i < re.responseJSON.length; i++) {
+            discusstmp += '<li class="question-item" id=' + i + '>'
+                    +'<div class="row">'
+                + '<div class="col-md-10">'
+                    +'<div class="row">'
+                + '<div class="col-sm-2 question-item-author">'
+                + '<div class="user-avatar ">'
+                + '<a class="avatar" href="user/13/study.html" target="_blank">'  //个人主页
+                + '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">'
+                + '</a>'
+                + '</div>'
+                + '</div>'
+                + '<div class="col-sm-10">'
+                + '<h4><a class="question-item-title" href="show.html" target="_blank">' + re.responseJSON[i].name + '+</a></h4>'   //组名
+                + '<div class="question-item-summary">'
+                + '<div class="user-username ">'
+                + '<span class="question-item-date">成员数：30人'    //人数
+                + '</div>'
+                + '<span class="question-item-date">3小时前</span>最后回复'
+                + '<span class="question-item-date">'
+                + '<div class="user-username ">'
+                + '<a class="username" href="/user/256544" target="_blank">芃逆明</a>'
+                + '<span class="user-level">L38</span>'
+                + '</div>'
+                + '</span>'
+                    +'</div>'
+                + '</div>'
+                + '</div>'
+                + '</div>'
+                + '<div class="col-md-2 question-item-rank">'
+                + '<div class="question-item-answered">'
+                + '<div>+添加讨论</div>'
+                + '<div>+游客浏览</div>'
+                + '</div>'
+                + '</div>'
+                    +'</div>'
+                + '</li>';
+        }
+        document.getElementById("discusstmp").innerHTML = discusstmp;
+    }
+
+
+    /**
+     * 获取热门路径
+     */
+    function show_path(){
+        var re = getResponse("/path/getHotPathList");
+        var pathtmp = '';
+        for (var i = 0; i < re.responseJSON.length; i++) {
+                pathtmp+='<a href="/paths/python"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25">'+re.responseJSON[i].name+'</a>';
+        }
+        document.getElementById("pathtmp").innerHTML=pathtmp;
+    }
+
+
+
+    /**
+     * 获取热门课程
+     */
+    function show_course(){
+        var re = getResponse("/course/getHotCourseList");
+        var coursetmp = '';
+        for (var i = 0; i < re.responseJSON.length; i++) {
+            coursetmp+='<a href="/paths/python"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25">'+re.responseJSON[i].name+'</a>';
+        }
+        document.getElementById("coursetmp").innerHTML=coursetmp;
+    }
+
+
+    /**
+     * 搜索
+     */
+    function search(){
+        var key=document.getElementById("key").value;
+
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

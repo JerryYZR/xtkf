@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    <meta content="webthemez" name="author" />
+    <title>激活账号</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+	
+    <link href="assets/css/select2.min.css" rel="stylesheet" >
+	<link href="assets/css/checkbox3.min.css" rel="stylesheet" >
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+        <div id="page-wrapper" >
+		  <div class="header"> 
+                        <h1 class="page-header">
+                             激活账号 <small>完善下列信息</small>
+                        </h1>
+		</div>
+		
+            <div id="page-inner">
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <form class="form-horizontal" id="form">
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">姓名</label>
+                                            <div class="col-sm-10">
+                                                <label  id="realname" class="control-label"></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="col-sm-2 control-label">学号</label>
+                                            <div class="col-sm-10">
+                                                <label  id="username" class="control-label"></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>电话</label>
+                                            <div class="col-sm-10">
+                                                <input type="phone" class="form-control" id="phone" placeholder="电话" width="30px">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>邮箱</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="email" placeholder="邮箱" width="30px">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>性别</label>
+                                            <div class="col-sm-10">
+                                                <div class="radio3 radio-check radio-inline">
+                                                    <input type="radio" id="radio4" name="radio" value="男" checked="">
+                                                    <label for="radio4">
+                                                        男
+                                                    </label>
+                                                </div>
+                                                <div class="radio3 radio-check radio-success radio-inline">
+                                                    <input type="radio" id="radio5" name="radio" value="女">
+                                                    <label for="radio5">
+                                                        女
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>新密码</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="password" placeholder="密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"><span style="color:red">*</span>确认密码</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="repassword" placeholder="重新输入密码">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <input type="button" class="btn btn-default" onclick="update()" value="激活">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+
+			</div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+	<script src="assets/js/select2.full.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $(".selectbox").select2();
+	});
+	</script>
+      <!-- Custom Js -->
+    <!--<script src="assets/js/custom-scripts.js"></script>-->
+        <script src="assets/js/util.js"></script>
+	<script>
+        //console.log(sessionStorage.getItem("user"));
+        var user= JSON.parse(sessionStorage.getItem("user"));//将json转换为对象
+        document.getElementById("realname").innerHTML=user.realname;
+        document.getElementById("username").innerHTML=user.username;
+
+        function update() {
+            var password=document.getElementById("password").value;
+            var repassword=document.getElementById("repassword").value;
+            var email=document.getElementById("email").value;
+            var phone=document.getElementById("phone").value;
+            var sexflag=document.getElementsByName("radio")[0].checked;
+            if(sexflag==true)
+                var sex="男"
+            else
+                var sex="女"
+            alert(sex);
+            var id=user.id;
+            if(password!=repassword){
+                alert("密码不一致！");
+            }
+            else{
+                if(password==''||repassword==''||email==''||phone==''){
+                    alert("请完善信息！");
+                }else{
+                    var re=getResponse('/user/updateUser',JSON.stringify({"email":email,"phone":phone,"password":password,"id":id,"sex":sex}));
+                    alert("激活成功！");
+                    window.location.href="index.html";
+                }
+            }
+
+        }
+
+    </script>
+		
+   
+</body>
+</html>

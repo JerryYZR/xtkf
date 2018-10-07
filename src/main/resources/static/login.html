@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>知 客 | 用户登录</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="index.html"><b>知</b>客</a>
+  </div>
+  <!-- /.lopath_logologo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+
+      <form>
+        <div class="form-group has-feedback">
+          <div class="">
+            <span class="fa fa-user form-control-feedback"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="form-control" placeholder="username" id="username">
+          </div>
+        </div>
+        <div class="form-group has-feedback">
+          <div class="">
+            <span class="fa fa-lock form-control-feedback"></span>&nbsp;&nbsp;&nbsp;
+            <input type="password" class="form-control" placeholder="Password" id="password">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="button" class="btn btn-primary btn-block btn-flat" onclick="login()">Login</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <br>
+      <br>
+      <p class="mb-0">
+        <a href="register.html" class="text-center">Register a new membership</a>
+      </p>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- iCheck -->
+<script src="../../plugins/iCheck/icheck.min.js"></script>
+<script src="vendor/bootstrap/js/util.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass   : 'iradio_square-blue',
+      increaseArea : '20%' // optional
+    })
+  })
+</script>
+<script>
+    function login() {
+        var username=document.getElementById("username").value;
+        var password=document.getElementById("password").value;
+        var formData=new FormData();
+        formData.append("username",username);
+        formData.append("password",password);
+
+        var re=getResponse("/user/login",formData,"multipart/form-data")
+        //alert("注册成功！");
+        document.getElementById("username").value='';
+        document.getElementById("password").value='';
+        if(re.responseJSON.status=='500')
+            alert(re.responseJSON.message);
+        else{
+            sessionStorage.setItem("user",JSON.stringify(re.responseJSON.user));
+            window.location.href = "index.html";
+        }
+    }
+
+</script>
+</body>
+</html>
