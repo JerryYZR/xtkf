@@ -45,6 +45,13 @@ public class DiscussService {
         return discussesList;
     }
 
+    public Integer getDiscussesNumberByUserId(Long userId) {
+
+        List<Discuss> discussesList = getDiscussesByUserId(userId);
+
+        return discussesList.size();
+    }
+
     public List<Discuss> getDiscussesByCreateUserId(Long create_userId) {
         List<Discuss> discussesList = new ArrayList<>();
         QueryWrapper<Discuss> queryWrapper = new QueryWrapper<>();

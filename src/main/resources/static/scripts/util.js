@@ -1,4 +1,4 @@
-function getResponse(url,data,contentType){
+function getResponse(url,data,contentType, type){
     var processData=true;
     if(url==null)
         return;
@@ -12,7 +12,7 @@ function getResponse(url,data,contentType){
     if(data==null)
         data={};
     var result=$.ajax({
-        type: "post",
+        type: type,
         url: url,
         data: data,
         contentType:contentType,

@@ -11,15 +11,15 @@
   <meta name="csrf-token" content="1483780974##87f89328c5616669f00302a263fe9061bb852818">
 	
 		
-      <title>讨论区 - 知客</title>
+      <title>讨论区 - 知课</title>
 
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/monokai-sublime.min.css">
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/katex.min.css">
     <link rel="stylesheet" href="styles/video-js.min.css">
-	<link rel="stylesheet" href="temp/styles.css">
+    <link rel="stylesheet" href="temp/styles.css">
 
 	<style>
 		@font-face {
@@ -87,7 +87,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="index.html">
                 <!--<img src="../img/logo_03.png">-->
             </a>
         </div>
@@ -113,11 +113,11 @@
                 
             </ul>
 
-            
+            <!--
             <div class="navbar-right btns">
                 <a class="btn btn-default navbar-btn sign-in" data-sign="signin" href="#sign-modal" data-toggle="modal">登录</a>
                 <a class="btn btn-default navbar-btn sign-up" data-sign="signup" href="#sign-modal" data-toggle="modal">注册</a>
-            </div>
+            </div>-->
             
 
             <form class="navbar-form navbar-right" action="../search" method="get" role="search">
@@ -139,63 +139,60 @@
             
     <div class="content">
         
-        <ul class="nav nav-tabs question-types" role="tablist" >
-
-                <li role="presentation" class="active">
-                    <a aria-controls="all" role="tab" toggle="tab">全部</a>
-                </li>
+        <ul class="nav nav-tabs question-types" role="tablist">
+            
                 
-                <div id="discusslabel">   </div>
+                <li role="presentation" class="active">
+                    <a href="#all"  onclick="showAll()" aria-controls="all" role="tab" toggle="tab">问题列表</a>
+                </li>
 
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active">
-                
-		<ul class="row question-items">
+    
+    
+    
+    
+    
+    
+<ul class="row question-items">
 	
 	
-			<div id="discusslist"></div>
+        <div id="questionlist"></div>
+        
         
     <li class="question-item" id="bigData">
     <div class="col-md-10">
         <div class="col-sm-2 question-item-author">
     <div class="user-avatar ">
-        <a class="avatar"  target="_blank">
+        <a class="avatar" href="../user/13/study.html" target="_blank">
             <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
         </a>        
     </div>
         </div>
         <div class="col-sm-10">
-        <h4>                       
-            <a class="question-item-title"  target="_blank"> 大数据分析讨论组</a>            
+        <h4>            
+            <img src="../img/topQuestion.png" id="headpic">            
+            <a class="question-title" target="_blank" id="title"> 求大数据分析工具！！</a>            
         </h4>
         <div class="question-item-summary">
   
     <div class="user-username ">
-    	
-    	<span class="question-item-date">成员数：</span>
-        <a class="avatar"  target="_blank">
-     		30人
+    	<span>楼主:</span>
+    	<span id="quizzername">林岳峰</span>
+    	<span class="question-item-date">&nbsp;回复数：</span>
+        <a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">
+     		30
         </a>
+        <br/>
+        <span>详情：</span>
+        <span id="content">最近在学大数据分析，不知道用什么工具好</span>
     </div>
-            <span class="question-item-date">3小时前</span>           
-            最后回复 <span class="question-item-date">
-    <div class="user-username ">
-        <a class="username" href="/user/256544" target="_blank">          
-                芃逆明
-        </a>
-        <span class="user-level">L38</span>
-    </div>
- </span>  
-        </div>
-        </div>
-    </div>
-    <div class="col-md-2 question-item-rank">
-        <div class="question-item-answered">
-            <div>+进入讨论</div>
             
         </div>
+        </div>
     </div>
+    
     </li>
 
 </ul>
@@ -229,7 +226,8 @@
         <li>
             <a href='#'>...</a>
         </li>
-
+        
+        
         
         <li class="">
             <a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>
@@ -260,6 +258,10 @@
 
         </div>
         <div class="col-md-3 layout-side">
+            
+    
+        
+        <a class="btn side-btn"  data-toggle="modal" data-target="#askquestion" id="showAskPanel">我要提问</a>
 
 
 <div class="panel panel-default panel-userinfo">
@@ -269,7 +271,7 @@
                 <div class="user-avatar">
                     
                      <a class="avatar" href="#sign-modal" data-toggle="modal" data-sign="signin">
-                         <img id="user_image" class="circle">
+                         <img id="user_image" class="circle" src="../img/head_pic.jpg">
                      </a>
                       
                 </div>
@@ -285,10 +287,10 @@
         <div class="row userinfo-data" >
             
             <hr>
-            <div >
-           	<p>个人资料</p>
-           	<p id="major">计算机科学与技术</p>
-           	<p id="speciality">擅长Android前端开发</p>
+            <div>
+           	    <p>个人资料</p>
+           	    <p id="major">计算机科学与技术</p>
+           	    <p id="speciality"></p>
             </div>
             
         </div>
@@ -308,42 +310,20 @@
     </div>
 </div>
 
-<div class="sidebox">
-    
-	<div class="sidebox-header">
-		
-		<h4 class="sidebox-title">正在学习的路径</h4>
-		
-	</div>
-	<div class="sidebox-body course-content side-list-body">
-		<ul style="list-style-type:none">
-			<div id="courselist"></div>
-        	<li><a> Python 研发工程师</a></li>
-        </ul>
-	</div>
-    
-</div>
-<div class="sidebox">
+<div class="panel panel-default panel-userinfo" id="submit-question" style="display: none;">
 	
-    
-	<div class="sidebox-header">
-		<h4 class="sidebox-title">参与的讨论组</h4>
-	</div>
-	<div class="sidebox-body course-content side-list-body">
-		<ul id="userdiscusslist" style="list-style-type:none">
-        	<li><a > 信息安全工程师</a></li>
-        </ul>
-	</div>
-    
+	<h4>标题</h4><br />
+	<input type="text" style="width: 250px; height:40px;" id="input-question-tile"/><br/>
+	<h4>内容</h4><br />
+	<input type="text" style="width: 250px; height:60px;" id="input-question-content"/><br/>
+	<button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput" style="width: 50px;">取消</button>
+    <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit" style="width: 50px;">提交</button>
 </div>
-
-    
 
         </div>
     </div>
 </div>
-    
-</div>
+
 
 
     <div id="base-data" data-flash="false"
@@ -353,17 +333,24 @@
         data-msg-user=""
         data-msg-system="">
     </div>
-    
-    
-	
-	
-    <script src="temp/lib.js?=2016121272249"></script>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="temp/highlight.min.js"></script>
-    <script src="temp/bootstrap-tour.min.js"></script>
-    <script src="temp/bootstrap-table.min.js"></script>
-    <script src="temp/bootstrap-table-zh-CN.min.js"></script>
-    <script src="temp/bootstrap-table-filter-control.min.js"></script>
+
+
+
+
+
+
+<script src="temp/lib.js?=2016121272249"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="temp/highlight.min.js"></script>
+<script src="temp/bootstrap-tour.min.js"></script>
+<script src="temp/bootstrap-table.min.js"></script>
+<script src="temp/bootstrap-table-zh-CN.min.js"></script>
+<script src="temp/bootstrap-table-filter-control.min.js"></script>
+    <script>
+        Raven.config('https://bc3878b7ed0a4468a65390bd79e6e73f@sentry.shiyanlou.com/5', {
+            release: '3.12.13'
+        }).install();
+    </script>
 
     
 <div id="jinja-data"
@@ -382,9 +369,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 clearfix footer-col">
-                <img src="image/lou-level.png">
+                <img src="../img/lou-level.png">
                 <div class="footer-slogan">欢迎来到讨论区！</div>
-
+                <div class="col-xs-2">
+                    <div class="social-item footer-weixin-item">
+                        <i class="fa fa-weixin"></i>
+                        <div class="footer-weixin">
+                            <img src="../img/footer-weixin.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="social-item footer-qq-item">
+                        <i class="fa fa-qq"></i>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="social-item footer-weibo-item">
+                        <a href="http://weibo.com/shiyanlou2013" target="_blank">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
                 <div class="col-title">公司</div>
@@ -421,139 +427,94 @@
     </div>
     
 </div>
-    <script src="scripts/util.js"></script>
-<script>
 
+<script src="scripts/util.js"></script>
+	<script>
+		
+function disp_prompt()
+{
+	var name=prompt("请输入您的名字","xxx"); // 弹出input框
+	alert(name);
+}
+		//获取从上个页面传过来的参数
+		var loc = location.href;
+  		var n1 = loc.length;//地址的总长度
+  		var n2 = loc.indexOf("=");//取得=号的位置
+  		var n3 = loc.indexOf("&");
+  		var n4 = loc.lastIndexOf("=");//取得最后一个=号的位置
+  		var userId = decodeURI(loc.substr(n2+1, n3-n2-1));//从=号后面获取userId
+  		var discussId = decodeURI(loc.substr(n4+1, n1-n4-1));//从另一个等号后面获取questionId
+  		var questionId=0;
+  			
+		$(function(){
 
-	//获取从上一个页面传递过来Id
-	//获取从上个页面传过来的参数
-	var loc = location.href;
-  	var n1 = loc.length;//地址的总长度
-  	var n2 = loc.indexOf("=");//取得=号的位置
-  	var n3 = loc.indexOf("&");
-  	var n4 = loc.lastIndexOf("=");//取得最后一个=号的位置
-  	var str1 = decodeURI(loc.substr(n2+1, n3-n2-1));//从=号后面获取userId
-  	var str2 = decodeURI(loc.substr(n4+1, n1-n4-1));//从另一个等号后面获取其他Id
-	//var userId=str1;
-	var userId=1;
-	var discussId=2;
-	$(function(){
+		    console.log(location.href)
+            console.log(1)
+            console.log(userId)
+			
+			//用户信息请求
+    		var userformData=new FormData();
+        	userformData.append("id",userId);
+        	var user=getResponse("/user",userformData,"multipart/form-data", "post");
+        	console.log(user)
+        	$("#username").text(user.responseJSON.username);
+        	$("#signature").text(user.responseJSON.signature);
+        	$("#major").text(user.responseJSON.major);
+        	$("#speciality").text(user.responseJSON.speciality);
 
-       //获取用户相关信息
-       //包括姓名，个性签名，专业，擅长领域（可不加），参与路径（课程）数，参与讨论组数	
-        var userformData=new FormData();
-        userformData.append("id",userId);
-        var user=getResponse("/user",userformData,"multipart/form-data", "post");
-        console.log(user)
-        $("#username").text(user.responseJSON.username);
-        $("#signature").text(user.responseJSON.signature);
-        $("#major").text(user.responseJSON.major);
-        $("#speciality").text(user.responseJSON.speciality);
-        $("#coursenum").text(user.responseJSON.coursenum);
-        $("#discussnum").text(user.responseJSON.discussnum);
-
-        $("#user_image").attr({
-            "src" : "image/" + user.responseJSON.image_url
-        });
-
-        //获取正在学习的路径（路径这边没找到对应接口地址）
-        var pathformData=new FormData();
-        pathformData.append("userId",userId);
-        var path=getResponse("/path/gatPathList",pathformData,"multipart/form-data", "post");
-    	var coursetmp1='';
-    	for(var i=0;i<path.responseJSON.length;i++){
-        	coursetmp1+='<li><a href="#">'+path.responseJSON[i].name+'</a></li>'; 
-    	}
-    	document.getElementById("courselist").innerHTML=coursetmp1;
-        
-        //获取正在参加的讨论组（列出参加的讨论组名称）
-        var discussformData=new FormData();
-        discussformData.append("id",userId);
-        var discuss=getResponse("/user/discusses/userId",discussformData,"multipart/form-data", "post");
-        console.log(discuss)
-    	var coursetmp2='';
-    	for(var i=0;i<discuss.responseJSON.length;i++){
-        	coursetmp2+='<li><a href="#">'+discuss.responseJSON[i].name+'</a></li>';
-    	}
-    	document.getElementById("userdiscusslist").innerHTML=coursetmp2;
-    	
-        //获取所有讨论组信息
-        var alldiscussformData=new FormData();
-     	var alldiscuss=getResponse("/discusses",alldiscussformData,"multipart/form-data", "get");
-     	console.log(alldiscuss)
-     	var coursetmp3='';
-    	for(var i=0;i<alldiscuss.responseJSON.length;i++){
-    		//有点长，加载的样式在159-199行（图片先不放了）
-    		coursetmp3+='<li class="question-item" id="bigData">'+
-    		'<div class="col-md-10"><div class="col-sm-2 question-item-author">'+
-    		'<div class="user-avatar "><a class="avatar"  target="_blank">'+
-            '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">'+
-        	'</a></div></div><div class="col-sm-10"><h4><a class="question-item-title"  target="_blank">'+
-        	alldiscuss.responseJSON[i].name+'</a></h4><div class="question-item-summary"><div class="user-username ">'
-    		+'<span class="question-item-date">成员数：</span><a class="avatar"  target="_blank">'+
-     		alldiscuss.responseJSON[i].discussNum+'</a></div>'+
-            '<span class="question-item-date">'+alldiscuss.responseJSON[i].create_time+
-            '</span>最后回复 <span class="question-item-date"><div class="user-username ">'+
-        	'<a class="username" href="/user/256544" target="_blank">'+alldiscuss.responseJSON[i].quizzer+
-        	'</a><span class="user-level">L38</span></div></span></div></div></div><div class="col-md-2 question-item-rank">'
-        	+'</div></li>';
+            $("#user_image").attr({
+                "src" : "image/" + user.responseJSON.image_url
+            });
         	
-    	}
-    	document.getElementById("discusslist").innerHTML=coursetmp3;
-    	
-    	//获取分类条件下的讨论组信息（没找到入口）
-    	$(".active").click(function(){
-    		var discussformData=new FormData();
-    		//获取被点击事件的内容（即分类标签）
-    		var str=$(this).text();
-        	discussformData.append("label",str);
-    		var category=getResponse("/discuss/getCategorydiscussList",discussformData,"multipart/form-data");
-     		var coursetmp4='';
-    		for(var i=0;i<category.responseJSON.length;i++){
-    			//加载的样式如上一个
-        		coursetmp4+= 't'; 
+			//获取某一讨论组下的所有问题
+        	var questionformData=new FormData();
+        	questionformData.append("id",userId);
+        	var quest=getResponse("/user/questions/createUserId",questionformData,"multipart/form-data", "post");
+        	console.log(quest)
+        	var coursetmp='';
+    		for(var i=0;i<quest.responseJSON.length;i++){
+    			//参考样式在164-194行
+        		coursetmp+='<li class="question-item" id="bigData"><div class="col-md-10">'+
+        		'<div class="col-sm-2 question-item-author"><div class="user-avatar ">'+
+        		'<a class="avatar" href="../user/13/study.html" target="_blank">'+
+            	'<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">'+
+        		'</a></div></div><div class="col-sm-10"><h4>'+                       
+            	'<a class="question-title" target="_blank" id="title">'+quest.responseJSON[i].title+
+            	'</a></h4><div class="question-item-summary"><div class="user-username ">'+
+    			'<span>楼主:</span><span id="quizzername">'+quest.responseJSON[i].quizzername+
+    			'</span><span class="question-item-date">&nbsp;回复数：</span>'+
+        		'<a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">'+
+     			quest.responseJSON[i].reply+'</a><br/><span>详情：</span><span id="content">'
+     			+quest.responseJSON[i].content+'</span></div></div></div></div></li>';
     		}
-    		document.getElementById("discusslist").innerHTML=coursetmp3;
-    	});
-    	
-    	//获取所有标签内容(没找到入口)
-		var labelformData=new FormData();
-		var label=getResponse("/labellist");
-		var coursetmp5='';
-		for(var i=0;i<label.responseJSON.length;i++){
-    		//加载的样式如下，在145-147行
-        	coursetmp3+='<li role="presentation" class="active"><a href="#course"  aria-controls="course" role="tab" toggle="tab">'
-        	+label.responseJSON[i].name+'</a></li>';
-    	}
-    	document.getElementById("discusslabel").innerHTML=coursetmp5;
-    	
-	});
-	//讨论组点击跳转并将被点击的讨论组名称传给下一个页面
-		$(".question-item-title").click(function(){
-        	location.href="questions.html?"+"userId="+userId+"&discussId="+discussId;
+    		document.getElementById("questionlist").innerHTML=coursetmp;
+
+      	});
+      	
+      	//提交问题
+      	$("#submit").click(function(){
+      		var questiontitle=$("#input-question-tile").text();
+      		var questioncontent=$("#input-question-content").text();
+      		var submitformdata=new FormData();
+      		submitformdata.append("userId",userId);
+      		submitformdata.append("questiontitle",questiontitle);
+      		submitformdata.append("questioncontent",questioncontent);
+      		getResponse("/updateQuestion",questionformData,"multipart/form-data", "post");
+      	})
+      	//提问按钮点击事件
+      	$("#showAskPanel").click(function(){
+      		$("#submit-question").style.display="block";
+      	})
+      	$("#hideInput").click(function(){
+      		$("#submit-question").style.display="none";
+      	})
+      	
+      	//问题列表点击跳转并传参(参数是问题的标题)给问题详情界面
+		$(".question-title").click(function(){
+        	location.href="show.html?"+"userId="+userId+"&questionId="+questionId;
 		});
-		/*
-		window.onload=function(ev){
-			 var oBtn=document.querySelector("button");
-			 
-			 oBtn.onclick=function(evl){
-			 	$.ajax({
-			 		type:"get",
-			 		url:"",
-			 		data:"userName=sd&userPas=123456",
-			 		async:true,
-			 		timeout:3000,
-			 		success:function(msg){
-			 			alert(msg);
-			 		},
-			 		error:function(msg){
-			 			alert();
-			 		}
-			 		
-			 	});
-			 } 
-		}
-		*/
+      	
+        
 	</script>
         
 	

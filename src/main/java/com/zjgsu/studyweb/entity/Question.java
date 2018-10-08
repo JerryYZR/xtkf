@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 public class Question {
     private Long id;
     private String title;
-    private Integer author;
-    private LocalDateTime create_time;
     private String content;
+    private LocalDateTime create_time;
+    private String author;
     private Integer reply;
-    private Integer check;
+    private Integer check_num;
+    private Long create_userId;
 }

@@ -19,4 +19,7 @@ public class User {
     private String school;
     private String academy;
     private String honor;
+    private String image_url;
+    private String signature;
+    private String speciality;
 }
