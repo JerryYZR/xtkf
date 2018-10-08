@@ -27,7 +27,6 @@ public class QuestionController {
     public List<Question> getQuestionsByCreateUserId(@RequestParam long id) {
         return questionService.getQuestionsByCreateUserId(id);
     }
-
     @RequestMapping(value = "/addQuestion", method = RequestMethod.POST)
     public Question addQuestion(@RequestBody Question question) {
         question.setCreate_time(LocalDateTime.now());

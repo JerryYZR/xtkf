@@ -73,4 +73,10 @@ public class DiscussService {
         return discussMapper.deleteById(id);
     }
 
+    public List<Discuss> getHotDiscuss() {
+        QueryWrapper<Discuss> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("heat");
+        queryWrapper.last("limit 8");
+        return discussMapper.selectList(queryWrapper);
+    }
 }

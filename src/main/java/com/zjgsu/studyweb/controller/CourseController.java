@@ -44,4 +44,9 @@ public class CourseController {
             return "{\"status\":\"fail\"}";
         }
     }
+
+    @RequestMapping(value = "/course/getHotCourseList", method = RequestMethod.POST)
+    List<Course> find(){
+        return courseService.findHotCourse();
+    }
 }

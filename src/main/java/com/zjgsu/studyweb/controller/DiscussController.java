@@ -66,4 +66,10 @@ public class DiscussController {
             return "{\"status\":\"fail\"}";
         }
     }
+
+
+    @RequestMapping(value = "/discuss/discussesbyhot", method = RequestMethod.POST)
+    public List<Discuss> getHotDiscuss() {
+        return discussService.getHotDiscuss();
+    }
 }

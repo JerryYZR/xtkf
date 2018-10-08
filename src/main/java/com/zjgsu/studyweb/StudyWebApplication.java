@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.zjgsu.studyweb.mapper")
+@MapperScan({"com.zjgsu.studyweb.mapper","com.zjgsu.studyweb.repository"})
 public class StudyWebApplication {
 
     public static void main(String[] args) {

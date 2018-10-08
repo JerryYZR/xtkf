@@ -1,5 +1,6 @@
 package com.zjgsu.studyweb.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjgsu.studyweb.entity.Course;
 import com.zjgsu.studyweb.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,12 @@ public class CourseService {
 
     public Integer deleteCourseById(long id) {
         return courseMapper.deleteById(id);
+    }
+
+    public List<Course> findHotCourse() {
+        QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("heat");
+        queryWrapper.last("limit 5");
+        return courseMapper.selectList(queryWrapper);
     }
 }

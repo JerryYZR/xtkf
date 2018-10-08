@@ -19,7 +19,6 @@ public class QuestionService {
 
     @Autowired
     QuestionUserMapper questionUserMapper;
-
     public List<Question> getAllQuestions() {
         return questionMapper.selectList(null);
     }
@@ -48,7 +47,6 @@ public class QuestionService {
 
         return questionList;
     }
-
     public Integer addQuestion(Question question) {
         return questionMapper.insert(question);
     }
