@@ -1,6 +1,7 @@
 package com.zjgsu.studyweb.controller;
 
 import com.zjgsu.studyweb.entity.Course;
+import com.zjgsu.studyweb.msg.ResponseData;
 import com.zjgsu.studyweb.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +38,11 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/deleteCourse", method = RequestMethod.POST)
-    public String deleteCourseById(@RequestParam long id) {
+    public ResponseData deleteCourseById(@RequestParam long id) {
         if (courseService.deleteCourseById(id) == 1) {
-            return "{\"status\":\"success\"}";
+            return new ResponseData(200,"OK",null);
         }else {
-            return "{\"status\":\"fail\"}";
+            return new ResponseData(1000,"no user",null);
         }
     }
 
