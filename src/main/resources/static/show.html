@@ -414,7 +414,7 @@
 
     //提交回复
     $("#submit").click(function () {
-        var replycontent = $("#input-reply").text();
+        var replycontent = $("#input-reply").val();
         var submitformdata = new FormData();
         submitformdata.append("context", replycontent);
 
