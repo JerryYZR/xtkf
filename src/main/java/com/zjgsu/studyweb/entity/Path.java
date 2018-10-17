@@ -7,16 +7,17 @@ import lombok.Data;
 @Data
 @TableName("Path")
 public class Path {
-
-
     private Integer id;
-
     private String name;
-
     private int heat;
-
     private String introduce;
-
     private String learn_time;
+    
+    public Integer getHeat() {
+        return heat;
+    }
 
+    public void setHeat(Integer heat) {
+        this.heat = heat;
+    }
 }
