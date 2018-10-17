@@ -3,8 +3,10 @@ package com.zjgsu.studyweb.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjgsu.studyweb.entity.Question;
 import com.zjgsu.studyweb.entity.QuestionUser;
+import com.zjgsu.studyweb.entity.Reply;
 import com.zjgsu.studyweb.mapper.QuestionMapper;
 import com.zjgsu.studyweb.mapper.QuestionUserMapper;
+import com.zjgsu.studyweb.mapper.ReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,18 @@ public class QuestionService {
 
     @Autowired
     QuestionUserMapper questionUserMapper;
+
+    @Autowired
+    ReplyMapper replyMapper;
+
     public List<Question> getAllQuestions() {
         return questionMapper.selectList(null);
+    }
+
+    public Question getQuestionById(long id) {
+        QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", id);
+        return questionMapper.selectOne(queryWrapper);
     }
 
     public List<Question> getQuestionsByUserId(Long userId) {
@@ -57,5 +69,14 @@ public class QuestionService {
 
     public Integer deleteQuestionById(long id) {
         return questionMapper.deleteById(id);
+    }
+
+
+    public void addReply(Reply reply) {
+        replyMapper.insert(reply);
+    }
+
+    public List<Reply> getAllReplys() {
+        return replyMapper.selectList(null);
     }
 }

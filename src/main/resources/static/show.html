@@ -128,7 +128,7 @@
 
             <div class="content question-detail">
                 <div class="question-headline">
-                    <span class="question-title"> 好心人可以告诉我怎么截屏吗。。。</span>
+                    <span id="questiontitle2" class="question-title"> 好心人可以告诉我怎么截屏吗。。。</span>
                 </div>
                 <div class="question-author">
                     <div class="user-avatar ">
@@ -236,8 +236,8 @@
                         <hr>
                         <div>
                             <p>个人资料</p>
-                            <p id="major">计算机科学与技术</p>
-                            <p id="speciality">擅长Android前端开发</p>
+                            <!--<p id="major">计算机科学与技术</p>-->
+                            <!--<p id="speciality">擅长Android前端开发</p>-->
                         </div>
 
                     </div>
@@ -277,16 +277,9 @@
 <script src="temp/bootstrap-table.min.js"></script>
 <script src="temp/bootstrap-table-zh-CN.min.js"></script>
 <script src="temp/bootstrap-table-filter-control.min.js"></script>
-<script>
-    Raven.config('https://bc3878b7ed0a4468a65390bd79e6e73f@sentry.shiyanlou.com/5', {
-        release: '3.12.13'
-    }).install();
-</script>
 
 
 <script src="temp/details.js?=2016121272249"></script>
-
-
 
 <div class="footer">
     <div class="container">
@@ -381,11 +374,17 @@
             "src": "image/" + user.responseJSON.image_url
         });
 
+        var questionTemp = new FormData();
+        questionTemp.append("id", questionId);
+        var quest2 = getResponse("/question", questionTemp, "multipart/form-data", "post");
+        console.log(quest2)
+        $("#questiontitle2").text(quest2.responseJSON.title);
+
 
         var questionformData = new FormData();
-        questionformData.append("questiontitle", questionId);
+        // questionformData.append("questiontitle", questionId);
         //没找到回复列表的入口
-        var quest = getResponse("/questions/replylist", questionformData, "multipart/form-data", "post");
+        var quest = getResponse("/replys", questionformData, "multipart/form-data", "get");
         //问题内容
         $("#quizzername").value = quest.quizzername;
         $("#questiontitle").value = quest.title;
@@ -405,10 +404,10 @@
                 '<img src=" https://static.shiyanlou.com/img/vip-icon.png"></a></div></div>' +
                 '<div class="answer-detail"><span class="comment-reply"><div class="user-username ">' +
                 '<a class="username" href="/user/212008" target="_blank">' +
-                quest.responseJSON[i].replyname + '</a><span class="user-level">L234</span></div></span>' +
+                "yzr" + '</a><span class="user-level">L234</span></div></span>' +
                 '<div class="answer-content markdown-body"><text >' +
-                quest.responseJSON[i].replycontent + '</text></div><div><span class="create-time">' +
-                quest.responseJSON[i].create_time + '</span><hr/></div></div></div></li>';
+                quest.responseJSON[i].context + '</text></div><div><span class="create-time">' +
+                 "2018.10.17" + '</span><hr/></div></div></div></li>';
         }
         document.getElementById("replylist").innerHTML = coursetmp;
     });
@@ -417,10 +416,11 @@
     $("#submit").click(function () {
         var replycontent = $("#input-reply").text();
         var submitformdata = new FormData();
-        submitformdata.append("userId", userId);
-        submitformdata.append("questionId", questionId)
-        submitformdata.append("replycontent", replycontent);
-        getResponse("/updateQuestion", questionformData, "multipart/form-data", "post");
+        submitformdata.append("context", replycontent);
+
+        $("#input-reply").text("");
+        // document.getElementById("submit-reply").style.display = "none";
+        getResponse("/addReply", submitformdata, "multipart/form-data", "post");
     })
     //提问按钮点击事件
     $("#showReplyPanel").click(function () {

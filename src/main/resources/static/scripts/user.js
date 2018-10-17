@@ -4,9 +4,7 @@ function getDiscussByUserId() {
     var userId = 1;
     var nav = [{"id":"nav_course", "name":"课程", "content_id":"courses"},
         {"id":"nav_path", "name":"路径", "content_id":"paths"},
-        {"id":"nav_discuss", "name":"讨论", "content_id":"discusses"},
-        {"id":"nav_system", "name":"系统通知", "content_id":"systems"},
-        {"id":"nav_setting", "name":"个人设置", "content_id":"settings"}]
+        {"id":"nav_discuss", "name":"讨论", "content_id":"discusses"}]
     var nav_discusses = [{"id":"topic", "content_id":"discuss_topic_items"},
         {"id":"response", "content_id":"discuss_response_items"},
         {"id":"collection", "content_id":"discuss_collection_items"}]

@@ -230,8 +230,8 @@
                         <hr>
                         <div>
                             <p>个人资料</p>
-                            <p id="major">计算机科学与技术</p>
-                            <p id="speciality"></p>
+                            <!--<p id="major">计算机科学与技术</p>-->
+                            <!--<p id="speciality"></p>-->
                         </div>
                     </div>
 
@@ -365,7 +365,7 @@
     var n4 = loc.lastIndexOf("="); //取得最后一个=号的位置
     var userId = decodeURI(loc.substr(n2 + 1, n3 - n2 - 1)); //从=号后面获取userId
     var discussId = decodeURI(loc.substr(n4 + 1, n1 - n4 - 1)); //从另一个等号后面获取questionId
-    var questionId = 0;
+    var questionId = 1;
 
     $(function () {
 
