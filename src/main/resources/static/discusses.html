@@ -402,7 +402,7 @@
     var str2 = decodeURI(loc.substr(n4 + 1, n1 - n4 - 1)); //从另一个等号后面获取其他Id
     //var userId=str1;
     var userId = 1;
-    var discussId = 2;
+    var discussId = 1;
     $(function () {
 
         //获取用户相关信息
@@ -436,7 +436,6 @@
         var discussformData = new FormData();
         discussformData.append("id", userId);
         var discuss = getResponse("/user/discusses/userId", discussformData, "multipart/form-data", "post");
-        console.log(discuss)
         var coursetmp2 = '';
         for (var i = 0; i < discuss.responseJSON.length; i++) {
             coursetmp2 += '<li><a href="#">' + discuss.responseJSON[i].name + '</a></li>';
@@ -448,7 +447,7 @@
         var alldiscuss = getResponse("/discusses", alldiscussformData, "multipart/form-data", "get");
         console.log(alldiscuss)
         var coursetmp3 = '';
-        for (var i = 0; i < alldiscuss.responseJSON.length; i++) {
+        for (var i = 1; i <= alldiscuss.responseJSON.length; i++) {
             //有点长，加载的样式在159-199行（图片先不放了）
             coursetmp3 += '<li class="question-item" id="bigData">' +
                 '<div class="col-md-10"><div class="col-sm-2 question-item-author">' +
@@ -456,13 +455,13 @@
                 '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">' +
                 '</a></div></div><div class="col-sm-10"><h4><a id="question' + i +
                 '" class="question-item-title"  target="_blank">' +
-                alldiscuss.responseJSON[i].name +
+                alldiscuss.responseJSON[i-1].name +
                 '</a></h4><div class="question-item-summary"><div class="user-username ">' +
                 '<span class="question-item-date">成员数：</span><a class="avatar"  target="_blank">' +
-                alldiscuss.responseJSON[i].discussNum + '</a></div>' +
-                '<span class="question-item-date">' + alldiscuss.responseJSON[i].create_time +
+                alldiscuss.responseJSON[i-1].discussNum + '</a></div>' +
+                '<span class="question-item-date">' + alldiscuss.responseJSON[i-1].create_time +
                 '</span>最后回复 <span class="question-item-date"><div class="user-username ">' +
-                '<a class="username" href="/user/256544" target="_blank">' + alldiscuss.responseJSON[i].quizzer +
+                '<a class="username" href="/user/256544" target="_blank">' + alldiscuss.responseJSON[i-1].quizzer +
                 '</a><span class="user-level">L38</span></div></span></div></div></div><div class="col-md-2 question-item-rank">' +
                 '</div></li>';
 
@@ -470,10 +469,10 @@
 
         }
         document.getElementById("discusslist").innerHTML = coursetmp3;
-        for (var i = 0; i < alldiscuss.responseJSON.length; i++) {
+        for (var i = 1; i <= alldiscuss.responseJSON.length; i++) {
             $("#question" + i).click(function () {
-                console.log(1)
-                location.href = "questions.html?" + "userId=" + userId + "&discussId=" + discussId;
+                var temp = this.id.split("n");
+                location.href = "questions.html?" + "userId=" + userId + "&discussId=" + alldiscuss.responseJSON[temp[1]-1].id;
             });
         }
 
@@ -507,7 +506,6 @@
     });
 
     $("#question10").click(function () {
-        console.log(1)
         location.href = "questions.html?" + "userId=" + userId + "&discussId=" + discussId;
     });
 </script>

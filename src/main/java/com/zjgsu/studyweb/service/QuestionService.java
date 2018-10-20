@@ -59,6 +59,16 @@ public class QuestionService {
 
         return questionList;
     }
+
+    public List<Question> getQuestionsByDiscussId(Long discussId) {
+        List<Question> questionList = new ArrayList<>();
+        QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("discuss_id", discussId);
+        questionList = questionMapper.selectList(queryWrapper);
+
+        return questionList;
+    }
+
     public Integer addQuestion(Question question) {
         return questionMapper.insert(question);
     }

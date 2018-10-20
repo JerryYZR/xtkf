@@ -148,8 +148,6 @@
                                         <div class="question-item-summary">
 
                                             <div class="user-username ">
-                                                <span>楼主:</span>
-                                                <span id="quizzername">林岳峰</span>
                                                 <span class="question-item-date">&nbsp;回复数：</span>
                                                 <a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">
                                                     30
@@ -369,15 +367,11 @@
 
     $(function () {
 
-        console.log(location.href)
-        console.log(1)
-        console.log(userId)
-
         //用户信息请求
         var userformData = new FormData();
         userformData.append("id", userId);
         var user = getResponse("/user", userformData, "multipart/form-data", "post");
-        console.log(user)
+        // console.log(user)
         $("#username").text(user.responseJSON.username);
         $("#signature").text(user.responseJSON.signature);
         $("#major").text(user.responseJSON.major);
@@ -389,12 +383,13 @@
 
         //获取某一讨论组下的所有问题
         var questionformData = new FormData();
-        questionformData.append("id", userId);
-        var quest = getResponse("/user/questions/createUserId", questionformData, "multipart/form-data",
+        questionformData.append("id", discussId);
+        var quest = getResponse("/user/questions/discussId", questionformData, "multipart/form-data",
             "post");
         console.log(quest)
+
         var coursetmp = '';
-        for (var i = 0; i < quest.responseJSON.length; i++) {
+        for (var i = 1; i <= quest.responseJSON.length; i++) {
             //参考样式在164-194行
             coursetmp += '<li class="question-item" id="bigData"><div class="col-md-10">' +
                 '<div class="col-sm-2 question-item-author"><div class="user-avatar ">' +
@@ -402,19 +397,19 @@
                 '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">' +
                 '</a></div></div><div class="col-sm-10"><h4>' +
                 '<a class="question-title" target="_blank" id="title' + i +
-                '">' + quest.responseJSON[i].title +
+                '">' + quest.responseJSON[i-1].title +
                 '</a></h4><div class="question-item-summary"><div class="user-username ">' +
-                '<span>楼主:</span><span id="quizzername">' + quest.responseJSON[i].quizzername +
-                '</span><span class="question-item-date">&nbsp;回复数：</span>' +
+                '</span><span class="question-item-date">回复数：</span>' +
                 '<a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">' +
-                quest.responseJSON[i].reply + '</a><br/><span>详情：</span><span id="content">' +
-                quest.responseJSON[i].content + '</span></div></div></div></div></li>';
+                quest.responseJSON[i-1].reply + '</a><br/><span>详情：</span><span id="content">' +
+                quest.responseJSON[i-1].content + '</span></div></div></div></div></li>';
         }
         document.getElementById("questionlist").innerHTML = coursetmp;
 
-        for (var i = 0; i < quest.responseJSON.length; i++) {
+        for (var i = 1; i <= quest.responseJSON.length; i++) {
             $("#title" + i).click(function () {
-                location.href = "show.html?" + "userId=" + userId + "&questionId=" + questionId;
+                var temp = this.id.split("e");
+                location.href = "show.html?" + "userId=" + userId + "&questionId=" + quest.responseJSON[temp[1]-1].id;
             });
         }
 

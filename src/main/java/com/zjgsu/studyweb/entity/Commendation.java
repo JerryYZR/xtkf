@@ -1,5 +1,7 @@
 package com.zjgsu.studyweb.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 
 @TableName("Commendation")
 public class Commendation {
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String username;//（评论用户）
     private String content;//评论内容

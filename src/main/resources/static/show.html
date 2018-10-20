@@ -147,7 +147,7 @@
                     <span id="lasttime">23小时前</span>
                 </div>
                 <div class="question-content markdown-body" id="content">
-                    <p>第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致</p>
+                    <p id="content_question">第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致</p>
 
                     <div class="labreport-detail-like">
 
@@ -357,7 +357,6 @@
 
 
     $(function () {
-        var userId = 1;
         console.log(1)
         console.log(userId)
         //用户信息请求
@@ -379,6 +378,15 @@
         var quest2 = getResponse("/question", questionTemp, "multipart/form-data", "post");
         console.log(quest2)
         $("#questiontitle2").text(quest2.responseJSON.title);
+        $("#content_question").text(quest2.responseJSON.content);
+
+        var createUserformData2 = new FormData();
+        userformData.append("id", quest2.responseJSON.create_userId);
+        var create_user = getResponse("/user", userformData, "multipart/form-data", "post");
+        $("#quizzername").text(create_user.responseJSON.username);
+        $("#quizzerpic").attr({
+            "src": "image/" + create_user.responseJSON.image_url
+        });
 
 
         var questionformData = new FormData();

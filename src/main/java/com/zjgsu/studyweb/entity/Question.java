@@ -16,4 +16,5 @@ public class Question {
     private Integer reply;
     private Integer check_num;
     private Long create_userId;
+    private Long discuss_id;
 }
