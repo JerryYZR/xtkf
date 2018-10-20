@@ -205,9 +205,13 @@
                 </div>
             </div>
 
+
+
         </div>
+
+
         <div class="col-md-3 layout-side">
-            <a class="btn side-btn" data-toggle="modal" data-target="#askquestion" id="showAskPanel">我要提问</a>
+            <a class="btn side-btn"  id="showAskPanel" href="#submit-question">我要提问</a>
             <div class="panel panel-default panel-userinfo">
                 <div class="panel-body body-userinfo">
                     <div class="media userinfo-header">
@@ -245,20 +249,25 @@
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-default panel-userinfo" id="submit-question" style="display: none;">
-
-                <h4>标题</h4><br />
-                <input type="text" style="width: 250px; height:40px;" id="input-question-tile" /><br />
-                <h4>内容</h4><br />
-                <input type="text" style="width: 250px; height:60px;" id="input-question-content" /><br />
-                <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput"
-                        style="width: 50px;">取消</button>
-                <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit"
-                        style="width: 50px;">提交</button>
-            </div>
-
         </div>
+
+        <div  id="submit-question">
+
+            <p style="margin-left: 100px;">标题</p>
+            <div class="textarea">
+                <textarea class="form-control" rows="1" id="input-question-tile" placeholder="问题标题"></textarea>
+            </div>
+            <!--<input type="text" style="width: 600px; height:40px; margin-left: 100px;" /><br/>-->
+            <p style="margin-left: 100px;">内容</p>
+            <div class="textarea">
+                <textarea class="form-control" rows="3" id="input-question-content" placeholder="问题内容"></textarea>
+            </div>
+            <!--<input type="text" style="width: 600px; height:60px;margin-left: 100px;" /><br/>-->
+            <br/>
+            <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput" style="width: 50px;margin-left: 100px;">取消</button>
+            <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit" style="width: 50px;">提交</button>
+        </div>
+
     </div>
 </div>
 
@@ -415,7 +424,8 @@
 
     });
 
-    //提交问题
+
+    //当前用户提交问题
     $("#submit").click(function () {
         var questiontitle = $("#input-question-tile").text();
         var questioncontent = $("#input-question-content").text();
@@ -424,14 +434,17 @@
         submitformdata.append("questiontitle", questiontitle);
         submitformdata.append("questioncontent", questioncontent);
         getResponse("/updateQuestion", questionformData, "multipart/form-data", "post");
-    })
+    });
+
+
     //提问按钮点击事件
+    /*
     $("#showAskPanel").click(function () {
         $("#submit-question").style.display = "block";
-    })
+    });
     $("#hideInput").click(function () {
         $("#submit-question").style.display = "none";
-    })
+    });*/
 
     //问题列表点击跳转并传参(参数是问题的标题)给问题详情界面
     $("#title10").click(function () {

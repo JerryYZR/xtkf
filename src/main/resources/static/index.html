@@ -89,10 +89,10 @@
                 <h1 class="am-show-md-down"><input type="text" name="name" value="" placeholder="请输入关键字" /><em class="font">&#xe6e7;</em><i data-am-modal="{target: '#my-modal'}">&#xe607;</i></h1>
                 <ul>
                     <li class="on"><a href="index.html">首页</a></li>
-                    <li><a href="">路径</a></li>
-                    <li><a href="#">论坛</a></li>
-                    <li><a href="#">课程</a></li>
-                    <li><a href="#">个人主页</a></li>
+                    <li><a href="course.html">路径</a></li>
+                    <li><a href="discusses.html">论坛</a></li>
+                    <!--<li><a href="#">课程</a></li>-->
+                    <li><a href="user.html">个人主页</a></li>
                 </ul>
             </div>
         </div>
@@ -204,7 +204,7 @@
      * 获取全部路径
      */
     var re=getResponse("/path/getPathList");
-    var coursetmp=''
+    var coursetmp='';
     for(var i=0;i<re.responseJSON.length;i++){
         coursetmp+='<li><a href="#">'+re.responseJSON[i].name+'</a></li>'; //url 地址 还未赋值
     }
@@ -253,8 +253,6 @@
                 + '</div>'
                 + '<div class="col-md-2 question-item-rank">'
                 + '<div class="question-item-answered">'
-                + '<div>+添加讨论</div>'
-                + '<div>+游客浏览</div>'
                 + '</div>'
                 + '</div>'
                     +'</div>'
@@ -268,6 +266,7 @@
      * 获取热门路径
      */
     function show_path(){
+
         var re = getResponse("/path/getHotPathList");
         var pathtmp = '';
         for (var i = 0; i < re.responseJSON.length; i++) {
