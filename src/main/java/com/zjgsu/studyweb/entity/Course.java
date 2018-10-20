@@ -15,4 +15,5 @@ public class Course {
     private Integer learn_time;
     private String url;
     private Integer degree;
+    private Long path_id;
 }
