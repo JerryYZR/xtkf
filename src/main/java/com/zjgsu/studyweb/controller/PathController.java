@@ -42,4 +42,13 @@ public class PathController {
     public List<Course> getCourseByPathId(@PathVariable Long path_id){
         return pathService.getCourseByPathId(path_id);
     }
+    @RequestMapping(value = "/path/getHotPathList", method = RequestMethod.POST)
+    List<Path> find(){
+        return pathService.findHotPath();
+    }
+
+    @RequestMapping(value = "/path/getPathList", method = RequestMethod.POST)
+    List<Path> findAll(){
+        return pathService.findAll();
+    }
 }

@@ -93,4 +93,11 @@ public class PathService {
         queryWrapper.eq("path_id",path_id);
         return courseMapper.selectList(queryWrapper);
     }
+
+    public List<Path> findHotPath() {
+        QueryWrapper<Path> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("heat");
+        queryWrapper.last("limit 5");
+        return pathMapper.selectList(queryWrapper);
+    }
 }
