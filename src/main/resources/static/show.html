@@ -410,7 +410,7 @@
 
 
     //点击回复按钮加载回复框和按钮
-    $(".replyToOne").click(function(){
+    $(document).on("click",".replyToOne",function(){
         $(this).after('<div class="replyContent">'+
             '<textarea class="replytext" rows="2" placeholder="回复内容" style="width: 500px; float:left;">'+
             '</textarea><button type="button" class="quxiao" class="quxiao" style="width: 50px;">'+

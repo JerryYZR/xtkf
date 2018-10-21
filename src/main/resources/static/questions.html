@@ -424,8 +424,8 @@
 
     //当前用户提交问题
     $("#submit").click(function () {
-        var questiontitle = $("#input-question-tile").text();
-        var questioncontent = $("#input-question-content").text();
+        var questiontitle = $("#input-question-tile").val();
+        var questioncontent = $("#input-question-content").val();
         var submitformdata = new FormData();
         submitformdata.append("userId", userId);
         submitformdata.append("questiontitle", questiontitle);
