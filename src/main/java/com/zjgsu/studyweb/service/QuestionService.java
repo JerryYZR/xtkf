@@ -2,9 +2,11 @@ package com.zjgsu.studyweb.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjgsu.studyweb.entity.Question;
+import com.zjgsu.studyweb.entity.QuestionTutor;
 import com.zjgsu.studyweb.entity.QuestionUser;
 import com.zjgsu.studyweb.entity.Reply;
 import com.zjgsu.studyweb.mapper.QuestionMapper;
+import com.zjgsu.studyweb.mapper.QuestionTutorMapper;
 import com.zjgsu.studyweb.mapper.QuestionUserMapper;
 import com.zjgsu.studyweb.mapper.ReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class QuestionService {
 
     @Autowired
     ReplyMapper replyMapper;
+
+    @Autowired
+    QuestionTutorMapper questionTutorMapper;
 
     public List<Question> getAllQuestions() {
         return questionMapper.selectList(null);
@@ -88,5 +93,30 @@ public class QuestionService {
 
     public List<Reply> getAllReplys() {
         return replyMapper.selectList(null);
+    }
+
+    public List<Reply> getReplysByQuestionId(Long questionId) {
+        List<Reply> replyList = new ArrayList<>();
+        QueryWrapper<Reply> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("question_id", questionId);
+        replyList = replyMapper.selectList(queryWrapper);
+
+        return replyList;
+    }
+
+    public List<Question> getQuestionsByTutorId(Long tutorId) {
+        List<QuestionTutor> questionsIdList = new ArrayList<>();
+        QueryWrapper<QuestionTutor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("tutor_id", tutorId);
+        questionsIdList = questionTutorMapper.selectList(queryWrapper);
+
+        List<Question> discussesList = new ArrayList<>();
+        for (QuestionTutor questionTutor : questionsIdList) {
+            QueryWrapper<Question> queryWrapper_question = new QueryWrapper<>();
+            queryWrapper_question.eq("id", questionTutor.getQuestion_id());
+            discussesList.add(questionMapper.selectOne(queryWrapper_question));
+        }
+
+        return discussesList;
     }
 }

@@ -2,8 +2,10 @@ package com.zjgsu.studyweb.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjgsu.studyweb.entity.Discuss;
+import com.zjgsu.studyweb.entity.DiscussTutor;
 import com.zjgsu.studyweb.entity.DiscussUser;
 import com.zjgsu.studyweb.mapper.DiscussMapper;
+import com.zjgsu.studyweb.mapper.DiscussTutorMapper;
 import com.zjgsu.studyweb.mapper.DiscussUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class DiscussService {
     DiscussMapper discussMapper;
     @Autowired
     DiscussUserMapper discussUserMapper;
+    @Autowired
+    DiscussTutorMapper discussTutorMapper;
 
     public List<Discuss> getAllDiscusses() {
         return discussMapper.selectList(null);
@@ -39,6 +43,22 @@ public class DiscussService {
         for (DiscussUser discussUser : discussesIdList) {
             QueryWrapper<Discuss> queryWrapper_discuss = new QueryWrapper<>();
             queryWrapper_discuss.eq("id", discussUser.getDiscussId());
+            discussesList.add(discussMapper.selectOne(queryWrapper_discuss));
+        }
+
+        return discussesList;
+    }
+
+    public List<Discuss> getDiscussesByTutorId(Long userId) {
+        List<DiscussTutor> discussesIdList = new ArrayList<>();
+        QueryWrapper<DiscussTutor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("tutor_id", userId);
+        discussesIdList = discussTutorMapper.selectList(queryWrapper);
+
+        List<Discuss> discussesList = new ArrayList<>();
+        for (DiscussTutor discussTutor : discussesIdList) {
+            QueryWrapper<Discuss> queryWrapper_discuss = new QueryWrapper<>();
+            queryWrapper_discuss.eq("id", discussTutor.getDiscuss_id());
             discussesList.add(discussMapper.selectOne(queryWrapper_discuss));
         }
 

@@ -40,9 +40,7 @@ function getDiscussByUserId() {
             '</a></h4><div class="question-item-summary"><div class="user-username ">' +
             '<a class="username" href="/user/13/" target="_blank">'+
             discuss_user.responseJSON.username +
-            '</a><span class="user-level">L358</span>' +
-            '</div><span class="question-item-date">20秒前</span>' +
-            '</div></span></div></div></div><div class="col-md-2 question-item-rank">' +
+            '</a></div></div></span></div></div></div><div class="col-md-2 question-item-rank">' +
             '<div class="question-item-answered"><div>' +
             discusses.responseJSON[i].heat +
             '</div><div>回复</div></div>' +
@@ -61,9 +59,7 @@ function getDiscussByUserId() {
             '</a></h4><div class="question-item-summary"><div class="user-username ">' +
             '<a class="username" href="/user/13/" target="_blank">'+
             user.responseJSON.username +
-            '</a><span class="user-level">L358</span>' +
-            '</div><span class="question-item-date">20秒前</span>' +
-            '</div></span></div></div></div><div class="col-md-2 question-item-rank">' +
+            '</a></div></div></span></div></div></div><div class="col-md-2 question-item-rank">' +
             '<div class="question-item-answered"><div>' +
             discusses_topic.responseJSON[i].heat +
             '</div><div>回复</div></div>' +
