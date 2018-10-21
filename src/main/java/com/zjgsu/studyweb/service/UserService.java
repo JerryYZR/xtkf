@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import com.zjgsu.studyweb.config.SHA1;
 import com.zjgsu.studyweb.entity.User;
+import com.zjgsu.studyweb.entity.UserTutor;
 import com.zjgsu.studyweb.mapper.UserMapper;
+import com.zjgsu.studyweb.mapper.UserTutorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.zjgsu.studyweb.config.SHA1.encode;
@@ -18,6 +21,9 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    UserTutorMapper userTutorMapper;
+
     public List<User> getAllUserInfo() {
         return userMapper.selectList(null);
     }
@@ -26,6 +32,26 @@ public class UserService {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("id", id);
         return userMapper.selectOne(wrapper);
+    }
+
+    public List<User> getTutorInfoByUserId(long id) {
+        List<UserTutor> questionsIdList = new ArrayList<>();
+        QueryWrapper<UserTutor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", id);
+        questionsIdList = userTutorMapper.selectList(queryWrapper);
+
+        List<User> usersList = new ArrayList<>();
+        for (UserTutor userTutor : questionsIdList) {
+            QueryWrapper<User> queryWrapper_question = new QueryWrapper<>();
+            queryWrapper_question.eq("id", userTutor.getTutor_id());
+            usersList.add(userMapper.selectOne(queryWrapper_question));
+        }
+
+        return usersList;
+    }
+
+    public Integer addTutorUser(UserTutor discuss) {
+        return userTutorMapper.insert(discuss);
     }
 
     public Integer addUser(User discuss) {

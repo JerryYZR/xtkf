@@ -2,13 +2,13 @@ package com.zjgsu.studyweb.controller;
 
 import com.zjgsu.studyweb.entity.Question;
 import com.zjgsu.studyweb.entity.Reply;
+import com.zjgsu.studyweb.entity.User;
 import com.zjgsu.studyweb.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class QuestionController {
@@ -46,13 +46,26 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/user/questions/tutorId", method = RequestMethod.POST)
-    public List<Question> getQuestionsByTutorId(@RequestParam long id) {
+    public List<User> getQuestionsByTutorId(@RequestParam long id) {
+        return questionService.getTutorsByQuestionId(id);
+    }
+
+    @RequestMapping(value = "/user/tutors/questionId", method = RequestMethod.POST)
+    public List<Question> getTutorsByQuestionId(@RequestParam long id) {
         return questionService.getQuestionsByTutorId(id);
     }
 
     @RequestMapping(value = "/addQuestion", method = RequestMethod.POST)
-    public Question addQuestion(@RequestBody Question question) {
+    public Question addQuestion(@RequestParam String title, @RequestParam String content,
+                                @RequestParam Long create_user_id, @RequestParam Long discuss_id) {
+        Question question = new Question();
+        question.setDiscuss_id(discuss_id);
+        question.setTitle(title);
+        question.setContent(content);
+        question.setCreate_user_id(create_user_id);
+        question.setCheck_num(100);
         question.setCreate_time(LocalDateTime.now());
+        System.out.println(question);
         if (questionService.addQuestion(question) == 1) {
             return question;
         } else {
@@ -66,7 +79,7 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/addReply", method = RequestMethod.POST)
-    public Reply addReply(@RequestParam String context) {
+    public Reply addReply(@RequestParam String context, @RequestParam Long reply_to_user_id) {
 //        final String context = requestMap.get("context");
 //        final String userId = requestMap.get("userId");
 //        final String questionId = requestMap.get("questionId");
@@ -74,6 +87,8 @@ public class QuestionController {
         reply.setContext(context);
         reply.setQuestion_id(Long.parseLong("1"));
         reply.setUser_id(Long.parseLong("1"));
+        reply.setCreate_time(LocalDateTime.now());
+        reply.setReply_to_user_id(reply_to_user_id);
         questionService.addReply(reply);
         return reply;
     }

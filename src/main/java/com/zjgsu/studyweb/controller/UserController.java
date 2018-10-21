@@ -1,6 +1,7 @@
 package com.zjgsu.studyweb.controller;
 
 import com.zjgsu.studyweb.entity.User;
+import com.zjgsu.studyweb.entity.UserTutor;
 import com.zjgsu.studyweb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -33,7 +34,13 @@ public class UserController {
     })
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public User getUserIfoById(@RequestParam long id) {
-        return userService.getUserInfoById(id);
+        User user = userService.getUserInfoById(id);
+        return user;
+    }
+
+    @RequestMapping(value = "/users/tutor/userId", method = RequestMethod.POST)
+    public List<User> getTutorInfoByUserId(@RequestParam long id) {
+        return userService.getTutorInfoByUserId(id);
     }
 
     @ApiOperation(value="添加用户", notes="添加用户接口")
@@ -43,6 +50,18 @@ public class UserController {
             return user;
         } else {
             return new User();
+        }
+    }
+
+    @RequestMapping(value = "/addTutorUser", method = RequestMethod.POST)
+    public UserTutor addTutorUser(@RequestParam long userId, @RequestParam long tutorId) {
+        UserTutor userTutor = new UserTutor();
+        userTutor.setTutor_id(tutorId);
+        userTutor.setUser_id(userId);
+        if (userService.addTutorUser(userTutor) == 1) {
+            return userTutor;
+        } else {
+            return new UserTutor();
         }
     }
 

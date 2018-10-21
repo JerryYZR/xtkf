@@ -1,14 +1,8 @@
 package com.zjgsu.studyweb.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zjgsu.studyweb.entity.Question;
-import com.zjgsu.studyweb.entity.QuestionTutor;
-import com.zjgsu.studyweb.entity.QuestionUser;
-import com.zjgsu.studyweb.entity.Reply;
-import com.zjgsu.studyweb.mapper.QuestionMapper;
-import com.zjgsu.studyweb.mapper.QuestionTutorMapper;
-import com.zjgsu.studyweb.mapper.QuestionUserMapper;
-import com.zjgsu.studyweb.mapper.ReplyMapper;
+import com.zjgsu.studyweb.entity.*;
+import com.zjgsu.studyweb.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +23,9 @@ public class QuestionService {
 
     @Autowired
     QuestionTutorMapper questionTutorMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     public List<Question> getAllQuestions() {
         return questionMapper.selectList(null);
@@ -59,7 +56,7 @@ public class QuestionService {
     public List<Question> getQuestionsByCreateUserId(Long create_userId) {
         List<Question> questionList = new ArrayList<>();
         QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("create_userId", create_userId);
+        queryWrapper.eq("create_user_id", create_userId);
         questionList = questionMapper.selectList(queryWrapper);
 
         return questionList;
@@ -118,5 +115,21 @@ public class QuestionService {
         }
 
         return discussesList;
+    }
+
+    public List<User> getTutorsByQuestionId(Long questionId) {
+        List<QuestionTutor> questionsIdList = new ArrayList<>();
+        QueryWrapper<QuestionTutor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("question_id", questionId);
+        questionsIdList = questionTutorMapper.selectList(queryWrapper);
+
+        List<User> usersList = new ArrayList<>();
+        for (QuestionTutor questionTutor : questionsIdList) {
+            QueryWrapper<User> queryWrapper_user = new QueryWrapper<>();
+            queryWrapper_user.eq("id", questionTutor.getTutor_id());
+            usersList.add(userMapper.selectOne(queryWrapper_user));
+        }
+
+        return usersList;
     }
 }
