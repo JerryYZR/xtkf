@@ -162,37 +162,37 @@
 
                     <ul>
                         <div id="replylist"></div>
-                        <li>
-                            <div class="answer-item">
-                                <div class="answer-head">
-                                    <div class="user-avatar ">
-                                        <a class="avatar" href="/user/212008" target="_blank">
-                                            <img src="https://dn-simplecloud.shiyanlou.com/gravatarNTY0MzE5MjI0Njgz.png?v=1477283063583&amp;imageView2/1/w/200/h/200">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="answer-detail">
-                                        <span class="comment-reply">
-                                            <div class="user-username ">
-                                                <a class="username" href="/user/212008" target="_blank">
-                                                    米斯特_周
-                                                </a>
-                                            </div>
-                                        </span>
+                        <!--<li>-->
+                            <!--<div class="answer-item">-->
+                                <!--<div class="answer-head">-->
+                                    <!--<div class="user-avatar ">-->
+                                        <!--<a class="avatar" href="/user/212008" target="_blank">-->
+                                            <!--<img src="https://dn-simplecloud.shiyanlou.com/gravatarNTY0MzE5MjI0Njgz.png?v=1477283063583&amp;imageView2/1/w/200/h/200">-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="answer-detail">-->
+                                        <!--<span class="comment-reply">-->
+                                            <!--<div class="user-username ">-->
+                                                <!--<a class="username" href="/user/212008" target="_blank">-->
+                                                    <!--米斯特_周-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                        <!--</span>-->
 
-                                    <div class="answer-content markdown-body">
+                                    <!--<div class="answer-content markdown-body">-->
 
-                                        <text>同问 我也找不到！</text>
-                                    </div>
+                                        <!--<text>同问 我也找不到！</text>-->
+                                    <!--</div>-->
 
-                                    <div>
-                                        <span class="create-time">21小时前</span>
+                                    <!--<div>-->
+                                        <!--<span class="create-time">21小时前</span>-->
 
-                                        <hr />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                                        <!--<hr />-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
                     </ul>
 
                 </div>
@@ -213,7 +213,7 @@
                     <div class="media userinfo-header">
                         <div class="media-left">
                             <div class="user-avatar">
-                                <a class="avatar" href="/user.html" data-toggle="modal" data-sign="signin">
+                                <a id="user_url" class="avatar" data-toggle="modal" data-sign="signin">
                                     <img id="user_image" class="circle">
                                 </a>
                             </div>
@@ -236,15 +236,21 @@
                 </div>
             </div>
 
-            <!--<div class="panel panel-default panel-userinfo" id="submit-reply" style="display: none;">-->
+            <div class="sidebox">
+                <div class="sidebox-header">
+                    <h4 class="sidebox-title">求助大佬</h4>
+                </div>
+                <div id="dalaolist"></div>
 
-                <!--<h4>回复</h4><br />-->
-                <!--<input type="text" style="width: 250px; height:40px;" id="input-reply" /><br />-->
-                <!--<button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput"-->
-                        <!--style="width: 50px;">取消</button>-->
-                <!--<button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit"-->
-                        <!--style="width: 50px;">提交</button>-->
-            <!--</div>-->
+            <div class="panel panel-default panel-userinfo" id="submit-reply" style="display: none;">
+
+                <h4>回复</h4><br />
+                <input type="text" style="width: 250px; height:40px;" id="input-reply" /><br />
+                <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput"
+                        style="width: 50px;">取消</button>
+                <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit"
+                        style="width: 50px;">提交</button>
+            </div>
 
             <!--<div class="textarea">-->
                 <!--<textarea class="form-control" rows="3" id="input-question-content" placeholder="问题内容"></textarea>-->
@@ -340,6 +346,8 @@
 
     //设置全局回复框数量为一
     var countReplyArea=0;
+    var replyIndex = 0;
+    var replyUserId = 0;
 
     $(function () {
         //用户信息请求
@@ -356,6 +364,10 @@
             "src": "image/" + user.responseJSON.image_url
         });
 
+        $("#user_url").attr({
+            "href": "/user.html?userId=" + user.responseJSON.id
+        });
+
         var discussformData = new FormData();
         discussformData.append("id", userId);
         var discuss = getResponse("/user/discusses/userId", discussformData, "multipart/form-data", "post");
@@ -364,6 +376,7 @@
         var questionTemp = new FormData();
         questionTemp.append("id", questionId);
         var quest2 = getResponse("/question", questionTemp, "multipart/form-data", "post");
+        var tutorList = getResponse("/user/questions/tutorId",questionTemp,"multipart/form-data", "post");
         console.log(quest2)
         $("#questiontitle2").text(quest2.responseJSON.title);
         $("#content_question").text(quest2.responseJSON.content);
@@ -376,59 +389,101 @@
             "src": "image/" + create_user.responseJSON.image_url
         });
 
+        console.log(1)
+        console.log(tutorList)
+        //tutors
+        var tutors_html='';
+        for(var i=1; i<=tutorList.responseJSON.length; i++){
+            tutors_html += '<div id="tutor' + i +
+                '" class="sidebox-body course-content side-list-body">' +
+                '<ul style="list-style-type:none"><div class="media-left">' +
+                '<div class="user-avatar"><a class="avatar" href="#sign-modal" data-toggle="modal" data-sign="signin">' +
+                '<img src="image/image_user.jpg" class="circle"></a></div></div><div class="media-body">' +
+                '<span class="media-heading username">' + tutorList.responseJSON[i-1].username +
+                '</span></div><div class="media-right"><a id="button_tutor' + i +
+                '" class="btn syl-btn-primary not-login">求助</a></div></ul></div>'
+        }
+        document.getElementById("dalaolist").innerHTML=tutors_html;
+        for (var i = 1; i <= tutorList.responseJSON.length; i++) {
+            $("#button_tutor" + i).click(function () {
+                var tutorformdata = new FormData();
+                var temp = this.id.split("r");
+                console.log(1)
+                console.log(userId)
+                console.log(2)
+                console.log(tutorList.responseJSON[temp[1]-1].id)
+                tutorformdata.append("userId", userId);
+                tutorformdata.append("tutorId", tutorList.responseJSON[temp[1]-1].id);
+                getResponse("/addTutorUser", tutorformdata, "multipart/form-data", "post");
+                // $(this).text("已求助");
+            });
+        }
+
 
         var questionformData = new FormData();
         questionformData.append("id", questionId);
         var quest = getResponse("/reply/questionId", questionformData, "multipart/form-data", "post");
 
-
-
-        console.log(quest)
         var coursetmp = '';
         //以下是回复的内容
-        for (var i = 0; i < quest.responseJSON.length; i++) {
+        for (var i = 1; i <= quest.responseJSON.length; i++) {
+            var replyOfReply = "";
+            if (quest.responseJSON[i-1].reply_to_user_id != null) {
+                var userformData3 = new FormData();
+                userformData3.append("id", quest.responseJSON[i-1].reply_to_user_id);
+                var user3 = getResponse("/user", userformData3, "multipart/form-data", "post");
+                replyOfReply = "  回复  " + user3.responseJSON.username;
+            }
 
             var userformData2 = new FormData();
-            userformData2.append("id", quest.responseJSON[i].user_id);
+            userformData2.append("id", quest.responseJSON[i-1].user_id);
             var user2 = getResponse("/user", userformData2, "multipart/form-data", "post");
 
-            //参考样式在211-250
             coursetmp += '<li><div class="answer-item"><div class="answer-head"><div class="user-avatar ">' +
                 '<a class="avatar" href="/user/212008" target="_blank">' +
                 '<img src="image/' + user2.responseJSON.image_url + '">' + '</a></div></div>' +
                 '<div class="answer-detail"><span class="comment-reply"><div class="user-username ">' +
                 '<a class="username" href="/user/212008" target="_blank">' +
-                user2.responseJSON.username + '</a></div></span>' +
+                 user2.responseJSON.username + replyOfReply + '</a></div></span>' +
                 '<div class="answer-content markdown-body"><text >' +
-                quest.responseJSON[i].context + '</text></div><div><span class="create-time">' +
-                 "2018.10.17" + '</span><hr/></div>'+
-                '<a class="replyToOne" style="border-right: hidden;color: deepskyblue;">回复</a>'+
+                quest.responseJSON[i-1].context + '</text></div><div><span class="create-time">' +
+                 quest.responseJSON[i-1].create_time + '</span><hr/></div>'+
+                '<a id="reply' + i +
+                '" class="replyToOne" style="border-right: hidden;color: deepskyblue;">回复</a>'+
                 '</div></div></li>';
         }
         document.getElementById("replylist").innerHTML = coursetmp;
 
-    });
+        for (var i = 1; i <= quest.responseJSON.length; i++) {
+            $("#reply" + i).click(function () {
+                if (countReplyArea==0) {
+                    $(this).after('<div class="replyContent">' +
+                        '<textarea class="replytext" rows="2" placeholder="回复内容" style="width: 500px; float:left;">' +
+                        '</textarea>&emsp;<button type="button" class="quxiao" ' +
+                        'style="width: 50px;height: 32px;color:#FFFFFF;background-color: #0074BC;border: hidden;margin-top: 1px;">' +
+                        '取消</button>&emsp;' +
+                        '</textarea><button type="button" class="tijiao submit-question btn btn-primary" style="width: 50px;border: hidden;">' +
+                        '提交</button></div>');
+                    countReplyArea=1;
+                    var temp = this.id.split("y");
+                    replyIndex = temp[1];
+                    replyUserId = quest.responseJSON[replyIndex-1].user_id;
+                }else if ( replyIndex != 0 ) {
+                    alert("对不起，只能同时回复一个人，请取消原回复框！");
+                }
+            });
 
 
-    //点击回复按钮加载回复框和按钮
-    $(document).on("click",".replyToOne",function(){
-        if (countReplyArea==0) {
-            $(this).after('<div class="replyContent">' +
-                '<textarea class="replytext" rows="2" placeholder="回复内容" style="width: 500px; float:left;">' +
-                '</textarea>&emsp;<button type="button" class="quxiao" class="quxiao" style="width: 50px;height: 32px;color:#FFFFFF;background-color: #0074BC;border: hidden;margin-top: 1px;">' +
-                '取消</button>&emsp;' +
-                '</textarea><button type="button" class="submit-question btn btn-primary" style="width: 50px;border: hidden;">' +
-                '提交</button></div>');
-            countReplyArea=1;
-        }else {
-            alert("对不起，只能同时回复一个人，请取消原回复框！");
         }
 
     });
+
     //取消按钮删除添加的回复框
     $(document).on("click",".quxiao",function(){
         $("div .replyContent").remove();
         countReplyArea--;
+        replyIndex = 0;
+        replyUserId = null;
     });
 
     //提交按钮提交回复
@@ -437,21 +492,22 @@
         var replycontent=$(".replytext").val();
 
         var submitformdata=new FormData();
-        submitformdata.append("userId",userId);
-        submitformdata.append("questionId",questionId)
-        submitformdata.append("replycontent",replycontent);
+        submitformdata.append("context",replycontent);
+        submitformdata.append("reply_to_user_id", replyUserId);
+        console.log(replyUserId)
         getResponse("/addReply", submitformdata, "multipart/form-data", "post");
     });
 
-//    //提交回复
-//    $("#submit").click(function () {
-//        var replycontent = $("#input-reply").val();
-//        var submitformdata = new FormData();
-//        submitformdata.append("context", replycontent);
-//        $("#input-reply").text("");
-//        // document.getElementById("submit-reply").style.display = "none";
-//        getResponse("/addReply", submitformdata, "multipart/form-data", "post");
-//    });
+   //提交回复
+   $("#submit").click(function () {
+       var replycontent = $("#input-reply").val();
+       var submitformdata = new FormData();
+       submitformdata.append("context", replycontent);
+       submitformdata.append("reply_to_user_id", null);
+       $("#input-reply").text("");
+       // document.getElementById("submit-reply").style.display = "none";
+       getResponse("/addReply", submitformdata, "multipart/form-data", "post");
+   });
 
     //提问按钮点击事件
     $("#showReplyPanel").click(function () {

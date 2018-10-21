@@ -5,7 +5,8 @@ function getDiscussByTutorId() {
     var formData_Discusses=new FormData();
     formData_Discusses.append("id" ,userId);
     var user = getResponse("/user",formData_Discusses,"multipart/form-data", "post");
-    var questions = getResponse("/user/questions/tutorId",formData_Discusses,"multipart/form-data", "post");
+    var questions = getResponse("/user/tutors/questionId",formData_Discusses,"multipart/form-data", "post");
+    console.log(questions)
 
     //userInfo
     $("#username").text(user.responseJSON.username);
@@ -17,6 +18,8 @@ function getDiscussByTutorId() {
     var discussformData = new FormData();
     discussformData.append("id", userId);
     var discuss_tutor = getResponse("/user/discusses/tutorId", discussformData, "multipart/form-data", "post");
+    console.log(1)
+    console.log(discuss_tutor)
     var coursetmp2 = '';
     for (var i = 1; i <= discuss_tutor.responseJSON.length; i++) {
         coursetmp2 += '<div id="discuss_tutor' + i +
@@ -38,6 +41,7 @@ function getDiscussByTutorId() {
 
     //discusses
     var discuss_response_html='';
+    console.log(1)
     for(var i=1; i<=questions.responseJSON.length; i++){
         discuss_response_html += '<li class="question-item" id="bigData"><div class="col-md-10">' +
             '<div class="col-sm-2 question-item-author"><div class="user-avatar ">' +

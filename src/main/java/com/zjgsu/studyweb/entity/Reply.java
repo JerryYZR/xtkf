@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @TableName("Reply")
 public class Reply {
@@ -13,4 +15,6 @@ public class Reply {
     private String context;
     private Long user_id;
     private Long question_id;
+    private Long reply_to_user_id;
+    private LocalDateTime create_time;
 }

@@ -131,36 +131,36 @@
                     <div role="tabpanel" class="tab-pane active">
                         <ul class="row question-items">
                             <div id="questionlist"></div>
-                            <li class="question-item" id="bigData">
-                                <div class="col-md-10">
-                                    <div class="col-sm-2 question-item-author">
-                                        <div class="user-avatar ">
-                                            <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <h4>
-                                            <img src="../img/topQuestion.png" id="headpic">
-                                            <a class="question-title" target="_blank" id="title10"> 求大数据分析工具！！</a>
-                                        </h4>
-                                        <div class="question-item-summary">
+                            <!--<li class="question-item" id="bigData">-->
+                                <!--<div class="col-md-10">-->
+                                    <!--<div class="col-sm-2 question-item-author">-->
+                                        <!--<div class="user-avatar ">-->
+                                            <!--<a class="avatar" href="../user/13/study.html" target="_blank">-->
+                                                <!--<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">-->
+                                            <!--</a>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-10">-->
+                                        <!--<h4>-->
+                                            <!--<img src="../img/topQuestion.png" id="headpic">-->
+                                            <!--<a class="question-title" target="_blank" id="title10"> 求大数据分析工具！！</a>-->
+                                        <!--</h4>-->
+                                        <!--<div class="question-item-summary">-->
 
-                                            <div class="user-username ">
-                                                <span class="question-item-date">&nbsp;回复数：</span>
-                                                <a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">
-                                                    30
-                                                </a>
-                                                <br />
-                                                <span>详情：</span>
-                                                <span id="content">最近在学大数据分析，不知道用什么工具好</span>
-                                            </div>
+                                            <!--<div class="user-username ">-->
+                                                <!--<span class="question-item-date">&nbsp;回复数：</span>-->
+                                                <!--<a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">-->
+                                                    <!--30-->
+                                                <!--</a>-->
+                                                <!--<br />-->
+                                                <!--<span>详情：</span>-->
+                                                <!--<span id="content">最近在学大数据分析，不知道用什么工具好</span>-->
+                                            <!--</div>-->
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
                         </ul>
 
                         <!--<nav class="pagination-container">-->
@@ -217,8 +217,8 @@
                     <div class="media userinfo-header">
                         <div class="media-left">
                             <div class="user-avatar">
-                                <a class="avatar" href="#sign-modal" data-toggle="modal" data-sign="signin">
-                                    <img id="user_image" class="circle" src="../img/head_pic.jpg">
+                                <a id="user_url" class="avatar" data-toggle="modal" data-sign="signin">
+                                    <img id="user_image" class="circle">
                                 </a>
                             </div>
                         </div>
@@ -377,6 +377,10 @@
             "src": "image/" + user.responseJSON.image_url
         });
 
+        $("#user_url").attr({
+            "href": "/user.html?userId=" + user.responseJSON.id
+        });
+
         //获取某一讨论组下的所有问题
         var questionformData = new FormData();
         questionformData.append("id", discussId);
@@ -426,11 +430,14 @@
     $("#submit").click(function () {
         var questiontitle = $("#input-question-tile").val();
         var questioncontent = $("#input-question-content").val();
+        console.log(questioncontent)
+        console.log(questiontitle)
         var submitformdata = new FormData();
-        submitformdata.append("userId", userId);
-        submitformdata.append("questiontitle", questiontitle);
-        submitformdata.append("questioncontent", questioncontent);
-        getResponse("/updateQuestion", questionformData, "multipart/form-data", "post");
+        submitformdata.append("create_user_id", userId);
+        submitformdata.append("discuss_id", discussId);
+        submitformdata.append("title", questiontitle);
+        submitformdata.append("content", questioncontent);
+        getResponse("/addQuestion", submitformdata, "multipart/form-data", "post");
     });
 
 
