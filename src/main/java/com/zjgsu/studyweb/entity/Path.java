@@ -15,6 +15,7 @@ public class Path {
     private int heat;
     private String introduce;
     private String learn_time;
+    private String image_url;
     
     public Integer getHeat() {
         return heat;

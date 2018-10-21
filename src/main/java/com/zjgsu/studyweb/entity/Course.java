@@ -19,4 +19,5 @@ public class Course {
     private String url;
     private Integer degree;
     private Long path_id;
+    private String image_url;
 }

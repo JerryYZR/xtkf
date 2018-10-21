@@ -37,7 +37,7 @@ function getPathInfo() {
         success: function(res) {
             console.log(res[0])
             $('.num1').html(res[0].heat);
-            $('.num2').html(res[0].course_number);  //课程数
+            //$('.num2').html(res[0].course_number);  //课程数
             $('.num3').html(res[0].learn_time);
             $('.pathName').html(res[0].name);
             $('.classintroduce').html(res[0].introduce);
@@ -55,14 +55,20 @@ function getPathCourse_1() {
         success: function(res) {
             //console.log(res)
             var list = '';
+            var course_num = 0;
             $.each(res, function(index, item) {
-                list += '<div class="col-md-4">' +
-                    '<div class="card mb-4 box-shadow">' +
-                    '<a href="' + item.url + '"><img class="card-img-top" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3780631991,570805979&fm=26&gp=0.jpg" alt="Card image cap">' +
-                    '<div class="card-body">' +
-                    '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
-                    '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
+                course_num += 1;
+                if(item.degree==1) {
+                    list += '<div class="col-md-4">' +
+                        '<div class="card mb-4 box-shadow">' +
+                        '<a href="' + item.url + '"><img class="card-img-top" src="' + item.image_url + '" alt="Card image cap">' +
+                        '<div class="card-body">' +
+                        '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
+                        '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
+                }
             })
+            console.log(course_num);
+            $('.num2').html(course_num);
             $('.stage1').html(list)
         },
         error: function() {}
@@ -79,12 +85,14 @@ function getPathCourse_2() {
           //  console.log(res)
             var list = '';
             $.each(res, function(index, item) {
-                list += '<div class="col-md-4">' +
-                    '<div class="card mb-4 box-shadow">' +
-                    '<a href="' + item.url + '"><img class="card-img-top" src="https://edu-image.nosdn.127.net/DDF16F24CB7546E2ADC1A6E7E5DA0961.jpg?imageView&thumbnail=426y240&quality=100&thumbnail=223x125&quality=100" alt="Card image cap">' +
-                    '<div class="card-body">' +
-                    '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
-                    '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
+                if(item.degree==2) {
+                    list += '<div class="col-md-4">' +
+                        '<div class="card mb-4 box-shadow">' +
+                        '<a href="' + item.url + '"><img class="card-img-top" src="' + item.image_url + '" alt="Card image cap">' +
+                        '<div class="card-body">' +
+                        '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
+                        '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
+                }
             })
             $('.stage2').html(list)
         },
@@ -101,12 +109,14 @@ function getPathCourse_3() {
          //   console.log(res)
             var list = '';
             $.each(res, function(index, item) {
-                list += '<div class="col-md-4">' +
-                    '<div class="card mb-4 box-shadow">' +
-                    '<a href="' + item.url + '"><img class="card-img-top" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3119524125,2946556036&fm=26&gp=0.jpg" alt="Card image cap">' +
-                    '<div class="card-body">' +
-                    '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
-                    '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
+                if(item.degree==3) {
+                    list += '<div class="col-md-4">' +
+                        '<div class="card mb-4 box-shadow">' +
+                        '<a href="' + item.url + '"><img class="card-img-top" src="' + item.image_url + '" alt="Card image cap">' +
+                        '<div class="card-body">' +
+                        '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
+                        '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
+                }
             })
             $('.stage3').html(list)
         },
@@ -133,7 +143,8 @@ function getComment() {
                     '    <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4058086101,2165125838&fm=27&gp=0.jpg"></a></div></div>\n' +
                     '    <div class="col-sm-11"><h4><div id="question10"><a class="question-item-title" target="_blank">\n' +
                     '        '+item.username +' </a></div></h4><p>'+item.content+'</p><div class="question-item-summary">\n' +
-                    '    <span class="question-item-date">' + item.create_time + '</span><a onclick="response(this,\'\'+item.username+\'\',\'+item.id+\')" href="#textarea">回复</a>\n' +
+                    '    <span class="question-item-date">' + item.create_time + '</span>\n' +
+                    //'    <span class="question-item-date">' + item.create_time + '</span><a onclick="response(this,\'\'+item.username+\'\',\'+item.id+\')" href="#textarea">回复</a>\n' +
                     '</div></div></div></li>'
             })
             $('.question-items').html(list);
@@ -228,7 +239,7 @@ function getCodeResource(){
             var list = '';
             $.each(res, function(index, item) {
                 list += '<div class="media text-muted pt-3">'+
-                    '<img src="https://csdnimg.cn/release/download/old_static/images/minetype/zip.svg" alt="" class="mr-2 rounded">'+
+                    '<img src="" alt="" class="mr-2 rounded">'+
                     '<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"><strong class="d-block text-gray-dark" style="font-size: 20px">'+
                     '<a href="' + item.url + '">' + item.name +'</a></strong>'+
                     '<span>' + item.introduce + '</span></p></div>'

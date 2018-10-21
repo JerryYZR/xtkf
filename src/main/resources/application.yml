@@ -1,6 +1,6 @@
 spring:
   datasource:
-     url: jdbc:mysql://119.23.228.122:3306/xtkf
+     url: jdbc:mysql://119.23.228.122:3306/xtkf?useUnicode=true&characterEncoding=UTF-8
      username: xtkf
      password: xtkf
      driver-class-name: com.mysql.jdbc.Driver
