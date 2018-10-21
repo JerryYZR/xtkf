@@ -143,8 +143,6 @@
                             到此一游
                         </a>
                     </div>
-
-                    <span id="lasttime">23小时前</span>
                 </div>
                 <div class="question-content markdown-body" id="content">
                     <p id="content_question">第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致</p>
@@ -171,8 +169,6 @@
                                         <a class="avatar" href="/user/212008" target="_blank">
                                             <img src="https://dn-simplecloud.shiyanlou.com/gravatarNTY0MzE5MjI0Njgz.png?v=1477283063583&amp;imageView2/1/w/200/h/200">
                                         </a>
-                                        <a class="member-icon" href="/vip" target="_blank">
-                                            <img src=" https://static.shiyanlou.com/img/vip-icon.png"></a>
                                     </div>
                                 </div>
                                 <div class="answer-detail">
@@ -181,7 +177,6 @@
                                                 <a class="username" href="/user/212008" target="_blank">
                                                     米斯特_周
                                                 </a>
-                                                <span class="user-level">L234</span>
                                             </div>
                                         </span>
 
@@ -218,8 +213,8 @@
                     <div class="media userinfo-header">
                         <div class="media-left">
                             <div class="user-avatar">
-                                <a class="avatar" href="#sign-modal" data-toggle="modal" data-sign="signin">
-                                    <img id="user_image" class="circle" src="../img/head_pic.jpg">
+                                <a class="avatar" href="/user.html" data-toggle="modal" data-sign="signin">
+                                    <img id="user_image" class="circle">
                                 </a>
                             </div>
                         </div>
@@ -231,23 +226,7 @@
                         </div>
                     </div>
 
-                    <div class="row userinfo-data">
-
-                        <hr>
-                        <div>
-                            <p>个人资料</p>
-                            <!--<p id="major">计算机科学与技术</p>-->
-                            <!--<p id="speciality">擅长Android前端开发</p>-->
-                        </div>
-
-                    </div>
-
                     <div class="userinfo-footer row">
-                        <div class="col-md-6 col-xs-6 pos-left">
-                            参与课程数
-                            <a id="coursenum"><span class="glyphicon glyphicon-bookmark"></span> 10</a>
-
-                        </div>
                         <div class="col-md-6 col-xs-6 pos-right">
                             参加讨论组数
                             <a id="discussnum"><span class="glyphicon glyphicon-send"></span> 20</a>
@@ -357,8 +336,6 @@
 
 
     $(function () {
-        console.log(1)
-        console.log(userId)
         //用户信息请求
         var userformData = new FormData();
         userformData.append("id", userId);
@@ -372,6 +349,11 @@
         $("#user_image").attr({
             "src": "image/" + user.responseJSON.image_url
         });
+
+        var discussformData = new FormData();
+        discussformData.append("id", userId);
+        var discuss = getResponse("/user/discusses/userId", discussformData, "multipart/form-data", "post");
+        $("#discussnum").text(discuss.responseJSON.length);
 
         var questionTemp = new FormData();
         questionTemp.append("id", questionId);
@@ -390,29 +372,27 @@
 
 
         var questionformData = new FormData();
-        // questionformData.append("questiontitle", questionId);
-        //没找到回复列表的入口
-        var quest = getResponse("/replys", questionformData, "multipart/form-data", "get");
-        //问题内容
-        $("#quizzername").value = quest.quizzername;
-        $("#questiontitle").value = quest.title;
-        //提问人头像
-        $("#quizzerpic").text(quest.quizzerpic);
-        $("#content").text(quest.content);
-        $("#lasttime").text(quest.lasttime);
+        questionformData.append("id", questionId);
+        var quest = getResponse("/reply/questionId", questionformData, "multipart/form-data", "post");
 
+
+
+        console.log(quest)
         var coursetmp = '';
         //以下是回复的内容
         for (var i = 0; i < quest.responseJSON.length; i++) {
+
+            var userformData2 = new FormData();
+            userformData2.append("id", quest.responseJSON[i].user_id);
+            var user2 = getResponse("/user", userformData2, "multipart/form-data", "post");
+
             //参考样式在211-250
             coursetmp += '<li><div class="answer-item"><div class="answer-head"><div class="user-avatar ">' +
                 '<a class="avatar" href="/user/212008" target="_blank">' +
-                '<img src="https://dn-simplecloud.shiyanlou.com/gravatarNTY0MzE5MjI0Njgz.png?v=1477283063583&amp;imageView2/1/w/200/h/200">' +
-                '</a><a class="member-icon" href="/vip" target="_blank">' +
-                '<img src=" https://static.shiyanlou.com/img/vip-icon.png"></a></div></div>' +
+                '<img src="image/' + user2.responseJSON.image_url + '">' + '</a></div></div>' +
                 '<div class="answer-detail"><span class="comment-reply"><div class="user-username ">' +
                 '<a class="username" href="/user/212008" target="_blank">' +
-                "yzr" + '</a><span class="user-level">L234</span></div></span>' +
+                user2.responseJSON.username + '</a></div></span>' +
                 '<div class="answer-content markdown-body"><text >' +
                 quest.responseJSON[i].context + '</text></div><div><span class="create-time">' +
                  "2018.10.17" + '</span><hr/></div></div></div></li>';

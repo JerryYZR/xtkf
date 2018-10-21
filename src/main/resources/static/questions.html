@@ -163,44 +163,44 @@
                             </li>
                         </ul>
 
-                        <nav class="pagination-container">
-                            <ul class="pagination">
-                                <li class="disabled">
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">上一页</span>
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="/questions/?sort=newest&amp;page=1&amp;area_type=all">1</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=2&amp;area_type=all">2</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=3&amp;area_type=all">3</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=4&amp;area_type=all">4</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=5&amp;area_type=all">5</a>
-                                </li>
-                                <li>
-                                    <a href='#'>...</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=548&amp;area_type=all">548</a>
-                                </li>
-                                <li class="">
-                                    <a aria-label="Next" href="/questions/?sort=newest&amp;page=2&amp;area_type=all">
-                                        <span aria-hidden="true">下一页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <!--<nav class="pagination-container">-->
+                            <!--<ul class="pagination">-->
+                                <!--<li class="disabled">-->
+                                    <!--<a href="#" aria-label="Previous">-->
+                                        <!--<span aria-hidden="true">上一页</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li class="active">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=1&amp;area_type=all">1</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=2&amp;area_type=all">2</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=3&amp;area_type=all">3</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=4&amp;area_type=all">4</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=5&amp;area_type=all">5</a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<a href='#'>...</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a href="/questions/?sort=newest&amp;page=548&amp;area_type=all">548</a>-->
+                                <!--</li>-->
+                                <!--<li class="">-->
+                                    <!--<a aria-label="Next" href="/questions/?sort=newest&amp;page=2&amp;area_type=all">-->
+                                        <!--<span aria-hidden="true">下一页</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</nav>-->
                     </div>
                 </div>
             </div>
@@ -224,20 +224,7 @@
                         </div>
                     </div>
 
-                    <div class="row userinfo-data">
-                        <hr>
-                        <div>
-                            <p>个人资料</p>
-                            <!--<p id="major">计算机科学与技术</p>-->
-                            <!--<p id="speciality"></p>-->
-                        </div>
-                    </div>
-
                     <div class="userinfo-footer row">
-                        <div class="col-md-6 col-xs-6 pos-left">
-                            参与课程数
-                            <a id="coursenum"><span class="glyphicon glyphicon-bookmark"></span> 10</a>
-                        </div>
                         <div class="col-md-6 col-xs-6 pos-right">
                             参加讨论组数
                             <a id="discussnum"><span class="glyphicon glyphicon-send"></span> 20</a>
@@ -390,21 +377,31 @@
 
         var coursetmp = '';
         for (var i = 1; i <= quest.responseJSON.length; i++) {
-            //参考样式在164-194行
+
+            var replyformData = new FormData();
+            replyformData.append("id", quest.responseJSON[i-1].id);
+            var quest_reply = getResponse("/reply/questionId", replyformData, "multipart/form-data", "post");
+
+            //参考样式在164-194行x
             coursetmp += '<li class="question-item" id="bigData"><div class="col-md-10">' +
                 '<div class="col-sm-2 question-item-author"><div class="user-avatar ">' +
                 '<a class="avatar" href="../user/13/study.html" target="_blank">' +
-                '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">' +
+                '<img src="image/gravataradmin.png">' +
                 '</a></div></div><div class="col-sm-10"><h4>' +
                 '<a class="question-title" target="_blank" id="title' + i +
                 '">' + quest.responseJSON[i-1].title +
                 '</a></h4><div class="question-item-summary"><div class="user-username ">' +
                 '</span><span class="question-item-date">回复数：</span>' +
-                '<a class="avatar" href="../user/13/study.html" target="_blank" id="replynum">' +
-                quest.responseJSON[i-1].reply + '</a><br/><span>详情：</span><span id="content">' +
+                '<a class="avatar" target="_blank" id="replynum">' +
+                quest_reply.responseJSON.length + '</a><br/><span>详情：</span><span id="content">' +
                 quest.responseJSON[i-1].content + '</span></div></div></div></div></li>';
         }
         document.getElementById("questionlist").innerHTML = coursetmp;
+
+        var discussformData = new FormData();
+        discussformData.append("id", userId);
+        var discuss = getResponse("/user/discusses/userId", discussformData, "multipart/form-data", "post");
+        $("#discussnum").text(discuss.responseJSON.length);
 
         for (var i = 1; i <= quest.responseJSON.length; i++) {
             $("#title" + i).click(function () {

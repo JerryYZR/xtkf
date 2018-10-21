@@ -45,6 +45,11 @@ public class QuestionController {
         return questionService.getQuestionsByDiscussId(id);
     }
 
+    @RequestMapping(value = "/user/questions/tutorId", method = RequestMethod.POST)
+    public List<Question> getQuestionsByTutorId(@RequestParam long id) {
+        return questionService.getQuestionsByTutorId(id);
+    }
+
     @RequestMapping(value = "/addQuestion", method = RequestMethod.POST)
     public Question addQuestion(@RequestBody Question question) {
         question.setCreate_time(LocalDateTime.now());
@@ -55,6 +60,11 @@ public class QuestionController {
         }
     }
 
+    @RequestMapping(value = "/reply/questionId", method = RequestMethod.POST)
+    public List<Reply> getReplysByQuestionId(@RequestParam long id) {
+        return questionService.getReplysByQuestionId(id);
+    }
+
     @RequestMapping(value = "/addReply", method = RequestMethod.POST)
     public Reply addReply(@RequestParam String context) {
 //        final String context = requestMap.get("context");
@@ -62,8 +72,8 @@ public class QuestionController {
 //        final String questionId = requestMap.get("questionId");
         Reply reply = new Reply();
         reply.setContext(context);
-        reply.setQuestionId(Long.parseLong("1"));
-        reply.setUserId(Long.parseLong("1"));
+        reply.setQuestion_id(Long.parseLong("1"));
+        reply.setUser_id(Long.parseLong("1"));
         questionService.addReply(reply);
         return reply;
     }

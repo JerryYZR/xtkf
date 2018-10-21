@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>yezr的个人主页 - 知客</title>
+
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+<div class="content-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 layout-body">
+                <div class="userinfo-banner container">
+                    <div class="banner-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left userinfo-banner-avatar">
+                                    <div class="user-avatar ">
+                                        <a class="avatar" target="_blank">
+                                            <img id="user_image" src="image/image_user.jpg">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="pull-left userinfo-banner-details">
+                                    <div class="userinfo-banner-meta">
+                                        <span id="username" class="username"></span>
+                                        <div class="vip-info">
+                                            <i class="i-user-vip-buy"></i>
+                                            <a href="/vip">导师</a>
+                                        </div>
+                                    </div>
+
+                                    <span class="join-date">2018-09-30 加入知客</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container layout">
+                    <div class="row">
+                        <div class="col-md-3 layout-side">
+                            <div class="sidebox invite-user">
+                                <div class="sidebox-header">
+                                    <h4 class="sidebox-title">邀请好友</h4>
+                                </div>
+                                <div class="sidebox-body">
+                                    <p>发邀请链接给好友，或分享微博/QQ群等，好友注册，你们各得3个智慧豆！</p>
+                                    <p>
+                                        <strong>邀请链接：</strong>
+                                        <input disabled class="form-control disabled invite-user-link" value="http://www.zhike.com/register">
+                                    </p>
+                                    <button class="btn btn-default invite-user-btn" data-clipboard-text="我正在实验楼撸代码，你也快来！800+编程实战教程，无需搭环境，直接练习！用我的链接注册，你我都能获得3个实验豆！http://www.zhike.com/register">复制</button>
+                                    <br>
+                                    <br>
+                                    <div class="invite-user-msg"></div>
+                                </div>
+                                <div class="side-footer">
+                                    <span>分享到：</span>
+                                    <a class="invite-qq" href="#"><img src="image/invite-qq.png"></a>
+                                    <a class="invite-qz" href="#"><img src="image/invite-qz.png"></a>
+                                    <a class="invite-weibo" href="#"><img src="image/invite-weibo.png"></a>
+                                </div>
+                            </div>
+
+                            <div class="sidebox">
+                                <div class="sidebox-header">
+                                    <h4 class="sidebox-title">管理的讨论组</h4>
+                                </div>
+                                <div id="discuss_list" class="sidebox-body course-content side-list-body">
+                                    <ul style="list-style-type:none">
+                                        <div class="media-left">
+                                            <div class="user-avatar">
+                                                <a class="avatar" href="#sign-modal" data-toggle="modal" data-sign="signin">
+                                                    <img src="image/gravataradmin.png" class="circle">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="media-heading username">JAVA</span>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9 layout-body">
+                            <div class="content">
+                                <ul class="nav nav-tabs" rolw="tablist" id="nav_user">
+                                    <li role="presentation" class="active">
+                                        <a id="nav_discuss">提问</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div  id="discusses" class="tab-pane active">
+                                        <ul id="discuss_response_items" class="row question-items"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 clearfix footer-col">
+                <img src="https://static.shiyanlou.com/img/logo-white.svg">
+                <div class="footer-slogan">动手做实验，轻松学IT</div>
+                <div class="col-xs-2">
+                    <div class="social-item footer-weixin-item">
+                        <i class="fa fa-weixin"></i>
+                        <div class="footer-weixin">
+                            <img src="https://static.shiyanlou.com/img/footer-weixin.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="social-item footer-weibo-item">
+                        <a href="http://weibo.com/shiyanlou2013" target="_blank">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">公司</div>
+                <a href="/aboutus" target="_blank">关于我们</a><br>
+                <a href="/contact" target="_blank">联系我们</a><br>
+                <a href="http://www.simplecloud.cn/jobs.html" target="_blank">加入我们</a><br>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">合作</div>
+                <a href="/contribute" target="_blank">我要投稿</a><br>
+                <a href="/labs" target="_blank">教师合作</a><br>
+                <a href="/edu/" target="_blank">高校合作</a><br>
+                <a href="/friends" target="_blank">友情链接</a><br>
+                <a href="/developer" target="_blank">开发者</a><br>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">服务</div>
+                <a href="/saas" target="_blank">企业版</a><br>
+                <a href="/bootcamp/" target="_blank">实战训练营</a><br>
+                <a href="/vip" target="_blank">会员服务</a><br>
+                <a href="/courses/reports" target="_blank">实验报告</a><br>
+                <a href="/faq" target="_blank">常见问题</a><br>
+                <a href="/privacy" target="_blank">隐私条款</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">学习路径</div>
+                <a href="/paths/1" target="_blank">Python学习路径</a><br>
+                <a href="/paths/5" target="_blank">Linux学习路径</a><br>
+                <a href="/paths/2" target="_blank">大数据学习路径</a><br>
+                <a href="/paths/11" target="_blank">Java学习路径</a><br>
+                <a href="/paths/10" target="_blank">PHP学习路径</a><br>
+                <a href="/paths/" , target="_blank">全部</a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center copyright">
+        <span>Copyright @2013-2018 实验楼在线教育</span>
+        <span class="ver-line"> | </span>
+        <a href="http://www.miibeian.gov.cn/" target="_blank">蜀ICP备13019762号</a>
+    </div>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-89338452-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</div>
+
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="scripts/util.js"></script>
+
+<script src="scripts/tutor.js"></script>
+</body>

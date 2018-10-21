@@ -140,95 +140,78 @@
 
                             <div id="discusslist"></div>
 
-                            <li class="question-item" id="bigData">
+                            <li class="question-item list" id="bigData">
                                 <div class="col-md-10">
                                     <div class="col-sm-2 question-item-author">
                                         <div class="user-avatar ">
                                             <a class="avatar" target="_blank">
-                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
+                                                <img src="image/gravataradmin.png">
                                             </a>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-10">
                                         <h4>
-                                            <div id="question10">
-                                            <a class="question-item-title" target="_blank">
-
-                                                    大数据分析讨论组
-
+                                            <a id="question10" class="question-item-title"  target="_blank">
+                                                alldiscuss.responseJSON[i-1].name
                                             </a>
-                                            </div>
                                         </h4>
                                         <div class="question-item-summary">
-
-                                            <div class="user-username ">
-
-                                                <span class="question-item-date">成员数：</span>
-                                                <a class="avatar" target="_blank">
-                                                    30人
-                                                </a>
-                                            </div>
-                                            <span class="question-item-date">3小时前</span>
-                                            最后回复 <span class="question-item-date">
-                                                    <div class="user-username ">
-                                                        <a class="username" href="/user/256544" target="_blank">
-                                                            芃逆明
-                                                        </a>
-                                                        <span class="user-level">L38</span>
-                                                    </div>
-                                                </span>
+                                            <span class="question-item-date">
+                                                alldiscuss.responseJSON[i-1].create_time
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2 question-item-rank">
                                     <div class="question-item-answered">
-                                        <div>+进入讨论</div>
-
+                                        <div>加入讨论</div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
 
-                        <nav class="pagination-container">
-                            <ul class="pagination">
 
-                                <li class="disabled">
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">上一页</span>
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="/questions/?sort=newest&amp;page=1&amp;area_type=all">1</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=2&amp;area_type=all">2</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=3&amp;area_type=all">3</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=4&amp;area_type=all">4</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=5&amp;area_type=all">5</a>
-                                </li>
-                                <li>
-                                    <a href='#'>...</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=548&amp;area_type=all">548</a>
-                                </li>
-                                <li class="">
-                                    <a aria-label="Next" href="/questions/?sort=newest&amp;page=2&amp;area_type=all">
-                                        <span aria-hidden="true">下一页</span>
-                                    </a>
-                                </li>
+                        <!--<nav class="pagination-container">-->
+                        <!--<ul class="pagination">-->
 
-                            </ul>
-                        </nav>
+                            <!--<li class="disabled">-->
+                                <!--<a href="#" aria-label="Previous">-->
+                                    <!--<span aria-hidden="true">上一页</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li class="active">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=1&amp;area_type=all">1</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=2&amp;area_type=all">2</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=3&amp;area_type=all">3</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=4&amp;area_type=all">4</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=5&amp;area_type=all">5</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href='#'>...</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a href="/questions/?sort=newest&amp;page=548&amp;area_type=all">548</a>-->
+                            <!--</li>-->
+                            <!--<li class="">-->
+                                <!--<a aria-label="Next" href="/questions/?sort=newest&amp;page=2&amp;area_type=all">-->
+                                    <!--<span aria-hidden="true">下一页</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+
+                        <!--</ul>-->
+                        <!--</nav>-->
                     </div>
                 </div>
             </div>
@@ -255,21 +238,7 @@
                         </div>
                     </div>
 
-                    <div class="row userinfo-data">
-                        <hr>
-                        <div>
-                            <p>个人资料</p>
-                            <!--<p id="major">计算机科学与技术</p>-->
-                            <!--<p id="speciality">擅长Android前端开发</p>-->
-                        </div>
-                    </div>
-
                     <div class="userinfo-footer row">
-                        <div class="col-md-6 col-xs-6 pos-left">
-                            参与课程数
-                            <a id="coursenum"><span class="glyphicon glyphicon-bookmark"></span> 10</a>
-
-                        </div>
                         <div class="col-md-6 col-xs-6 pos-right">
                             参加讨论组数
                             <a id="discussnum"><span class="glyphicon glyphicon-send"></span> 20</a>
@@ -416,7 +385,6 @@
         $("#major").text(user.responseJSON.major);
         $("#speciality").text(user.responseJSON.speciality);
         $("#coursenum").text(user.responseJSON.coursenum);
-        $("#discussnum").text(user.responseJSON.discussnum);
 
         $("#user_image").attr({
             "src": "image/" + user.responseJSON.image_url
@@ -441,6 +409,7 @@
             coursetmp2 += '<li><a href="#">' + discuss.responseJSON[i].name + '</a></li>';
         }
         document.getElementById("userdiscusslist").innerHTML = coursetmp2;
+        $("#discussnum").text(discuss.responseJSON.length);
 
         //获取所有讨论组信息
         var alldiscussformData = new FormData();
@@ -449,21 +418,17 @@
         var coursetmp3 = '';
         for (var i = 1; i <= alldiscuss.responseJSON.length; i++) {
             //有点长，加载的样式在159-199行（图片先不放了）
-            coursetmp3 += '<li class="question-item" id="bigData">' +
+            coursetmp3 += '<li class="question-item list" id="bigData">' +
                 '<div class="col-md-10"><div class="col-sm-2 question-item-author">' +
                 '<div class="user-avatar "><a class="avatar"  target="_blank">' +
-                '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">' +
+                '<img src="image/gravataradmin.png">' +
                 '</a></div></div><div class="col-sm-10"><h4><a id="question' + i +
                 '" class="question-item-title"  target="_blank">' +
                 alldiscuss.responseJSON[i-1].name +
-                '</a></h4><div class="question-item-summary"><div class="user-username ">' +
-                '<span class="question-item-date">成员数：</span><a class="avatar"  target="_blank">' +
-                alldiscuss.responseJSON[i-1].discussNum + '</a></div>' +
+                '</a></h4><div class="question-item-summary">' +
                 '<span class="question-item-date">' + alldiscuss.responseJSON[i-1].create_time +
-                '</span>最后回复 <span class="question-item-date"><div class="user-username ">' +
-                '<a class="username" href="/user/256544" target="_blank">' + alldiscuss.responseJSON[i-1].quizzer +
-                '</a><span class="user-level">L38</span></div></span></div></div></div><div class="col-md-2 question-item-rank">' +
-                '</div></li>';
+                '</span></div></div></div><div class="col-md-2 question-item-rank">' +
+                '<div class="question-item-answered"><div>加入讨论</div></div></div></li>';
 
 
 
