@@ -26,6 +26,7 @@
 
 .jum .container1 {
   padding:80px;
+  margin-top: 27px;
  background: url(http://img1.imgtn.bdimg.com/it/u=4155093,2492958556&fm=200&gp=0.jpg);
 }
 
@@ -77,6 +78,7 @@ footer p {
   /*float: right:;*/
   margin-left:10px;
   margin-bottom:0;
+  font-size: 20px;
 }
 .stage{
  
@@ -87,12 +89,12 @@ footer p {
 }
 
 .textarea {
-  width:90%;
+  width:78%;
   margin:0 auto;
 }
 
 .conmment{
-  width:90%;
+  width:78%;
   margin:0 auto;
 }
 
@@ -105,11 +107,11 @@ footer p {
 .stage-test{
   width:90%;
   margin:0 auto;
-  background-color: #e9ecef；
+  background-color: #e9ecef;
 }
 
 .source{
-  width:90%;
+  width:78%;
   margin:0 auto;
   margin-bottom:60px;
 }
@@ -125,5 +127,13 @@ footer p {
   font-size: 20px;
   color: #f8f9fa
 }
+
+.navigation1{
+  display: inline-block;
+  font-size: 16px;
+  padding-top: 15px;
+  padding-right: 15px;
+}
+
 
 

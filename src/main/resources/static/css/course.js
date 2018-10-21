@@ -16,9 +16,9 @@ $(function() {
              '<a href="./definite_path.html?id='+item.id+'"><div class="card mb-4 box-shadow">'+              
                     '<img class="card-img-top" src=""> '+       
                '<div class="card-body"><p class="card-text course-name">'+item.name+'</p><div class="">'+
-                '<p class="course-name"><small class="text-muted">31门课程</small></p></div></div></div></a></div>'
+                '<p class="course-name"><small class="text-muted">'+item.course_number+'</small></p></div></div></div></a></div>'
             })
-            $('.row').html(list)
+            $('.course').html(list)
         },
         error: function() {}
     });

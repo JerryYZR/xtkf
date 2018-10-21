@@ -36,7 +36,8 @@ function getPathInfo() {
         // data:{userid:id}
         success: function(res) {
             console.log(res[0])
-            $('.num1').html(res[0].heat);        
+            $('.num1').html(res[0].heat);
+            $('.num2').html(res[0].course_number);  //课程数
             $('.num3').html(res[0].learn_time);
             $('.pathName').html(res[0].name);
             $('.classintroduce').html(res[0].introduce);
@@ -60,7 +61,7 @@ function getPathCourse_1() {
                     '<a href="' + item.url + '"><img class="card-img-top" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3780631991,570805979&fm=26&gp=0.jpg" alt="Card image cap">' +
                     '<div class="card-body">' +
                     '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
-                    '<small class="text-muted">参与人数<span>' + item.heat + '</span></small></p></div></div></div></div>'
+                    '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
             })
             $('.stage1').html(list)
         },
@@ -83,7 +84,7 @@ function getPathCourse_2() {
                     '<a href="' + item.url + '"><img class="card-img-top" src="https://edu-image.nosdn.127.net/DDF16F24CB7546E2ADC1A6E7E5DA0961.jpg?imageView&thumbnail=426y240&quality=100&thumbnail=223x125&quality=100" alt="Card image cap">' +
                     '<div class="card-body">' +
                     '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
-                    '<small class="text-muted">参与人数<span>' + item.heat + '</span></small></p></div></div></div></div>'
+                    '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
             })
             $('.stage2').html(list)
         },
@@ -105,7 +106,7 @@ function getPathCourse_3() {
                     '<a href="' + item.url + '"><img class="card-img-top" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3119524125,2946556036&fm=26&gp=0.jpg" alt="Card image cap">' +
                     '<div class="card-body">' +
                     '<p class="card-text course-name">' + item.name + '</p></a><div class=""><p class="course-name">' +
-                    '<small class="text-muted">参与人数<span>' + item.heat + '</span></small></p></div></div></div></div>'
+                    '<small class="text-muted"><span>' + item.introduce + '</span></small></p></div></div></div></div>'
             })
             $('.stage3').html(list)
         },
@@ -124,14 +125,18 @@ function getComment() {
             console.log(res)
             var list = '';
             $.each(res, function(index, item) {
-                list += ' <div class="media text-muted pt-3">' +
-                    '<img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">' +
-                    '<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">' +
-                    '<strong class="d-block text-gray-dark"><a href="#">' + item.username + '</a></strong>' +
-                    '<small class="d-block ">' + item.content + '</small><span>' + item.create_time + '</span>' +
-                    '<span style="float: right;cursor: pointer;" onclick="response(this,\''+item.username+'\','+item.id+')"><a href="#textarea">回复</a></span></p></div>'
+
+
+                list+=' <li class="question-item" id="bigData" style="width:100%">\n' +
+                    '    <div class="col-md-10"><div class="col-sm-1 ">\n' +
+                    '    <div class="user-avatar "><a class="avatar" target="_blank">\n' +
+                    '    <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4058086101,2165125838&fm=27&gp=0.jpg"></a></div></div>\n' +
+                    '    <div class="col-sm-11"><h4><div id="question10"><a class="question-item-title" target="_blank">\n' +
+                    '        '+item.username +' </a></div></h4><p>'+item.content+'</p><div class="question-item-summary">\n' +
+                    '    <span class="question-item-date">' + item.create_time + '</span><a onclick="response(this,\'\'+item.username+\'\',\'+item.id+\')" href="#textarea">回复</a>\n' +
+                    '</div></div></div></li>'
             })
-            $('.conmment').html(list);
+            $('.question-items').html(list);
 
         },
         error: function() {}
@@ -192,6 +197,7 @@ function response(dom,name,id){
 
 //加入路径
 function addPath(){
+    document.getElementById("h").innerHTML="已加入";
     var message={
         // "id": "",
         "pathid":parseInt(id),
@@ -243,7 +249,7 @@ function stageTest1_1(){
             console.log(res)
             var list = '';
             $.each(res, function(index, item) {
-                list += '<a href="' + item.url + '">'+
+                list += '<span>阶段1：入门知识 </span><a href="' + item.url + '">'+
                     '<button type="button" style="float: right;margin-top: 10px;" class="btn btn-secondary">阶段测试</button></a>'
             })
             $('.stage1_1').html(list)
@@ -261,7 +267,7 @@ function stageTest1_2(){
             console.log(res)
             var list = '';
             $.each(res, function(index, item) {
-                list += '<a href="' + item.url + '">'+
+                list += '<span>阶段2：基础知识 </span><a href="' + item.url + '">'+
                     '<button type="button" style="float: right;margin-top: 10px;" class="btn btn-secondary">阶段测试</button></a>'
             })
             $('.stage1_2').html(list)
@@ -279,7 +285,7 @@ function stageTest1_3(){
             console.log(res)
             var list = '';
             $.each(res, function(index, item) {
-                list += '<a href="' + item.url + '">'+
+                list += '<span>阶段3：综合实践 </span><a href="' + item.url + '">'+
                     '<button type="button" style="float: right;margin-top: 10px;" class="btn btn-secondary">阶段测试</button></a>'
             })
             $('.stage1_3').html(list)

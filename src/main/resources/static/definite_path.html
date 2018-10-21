@@ -14,33 +14,61 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/album.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/monokai-sublime.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/katex.min.css">
+    <link rel="stylesheet" href="styles/video-js.min.css">
+    <link rel="stylesheet" href="temp/styles.css">
+
 </head>
 
 <body>
 
-<header>
-    <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
 
+<nav class="navbar navbar-default navbar-fixed-top header" style="background: #FFFFFF;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse"
+                    aria-expanded="false">
+                <span class="sr-only">知客</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"></a>
         </div>
-    </div>
-    <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-            <a href="#" class="navbar-brand d-flex align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                    <circle cx="12" cy="13" r="4"></circle>
-                </svg>
-                <strong>知客</strong>
-            </a>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="搜索 课程/路径" aria-label="搜索 课程/路径">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+        <div class="collapse navbar-collapse" id="header-navbar-collapse">
+            <ul class="">
+                <li class="navigation1" >
+                    <a href="./index.html">首页</a>
+                </li>
+                <li class="navigation1" >
+                    <a href="./course.html">路径</a>
+                </li>
+                <li class="navigation1" >
+                    <a href="./discusses.html" >讨论区</a>
+                </li>
+                <li class="navigation1" >
+                    <a href="../bootcamp/index.html">关于我们</a>
+                </li>
+            </ul>
+
+            <div class="navbar-right btns">
+                <a class="btn btn-default navbar-btn sign-in" data-sign="signin" href="./login.html" data-toggle="modal" style="margin-top: -49px">登录</a>
+                <a class="btn btn-default navbar-btn sign-up" data-sign="signup" href="./register.html" data-toggle="modal" style="margin-top: -49px">注册</a>
+            </div>
+
+            <form class="navbar-form navbar-right" action="../search" method="get" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search" autocomplete="off"  style="margin-top: -70px" placeholder="搜索 路径/课程" >
+                </div>
             </form>
         </div>
     </div>
-</header>
+</nav>
 
 <main role="main">
 
@@ -52,12 +80,12 @@
         </div>
         <div class="bottom-bar">
             <div style="width:150px;display: inline-block;float: left;">
-                <button type="button" class="btn btn-lg btn-block btn-primary" onclick="addPath()">加入路径</button>
+                <button id="h" type="button" class="btn btn-lg btn-block btn-primary" onclick="addPath()">加入路径</button>
             </div>
             <div>
                 <div class="verdical">
                     <p class="box-right">学习人数 <span class="num1">190</span></p>
-                    <!--<p class="box-right">课程数 <span  class="num2">31</span></p>-->
+                    <p class="box-right">课程数 <span  class="num2">31</span></p>
                     <p class="box-right">预计学习时长<span class="num3">111</span></p>
                 </div>
             </div>
@@ -66,7 +94,7 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="stage stage1_1"><span>阶段1：基础知识 </span>
+            <div class="stage stage1_1"><span>阶段1：入门知识 </span>
                 <a href="#">
                     <button type="button" style="float: right;margin-top: 10px;" class="btn btn-secondary">阶段测试</button>
                 </a>
@@ -84,7 +112,7 @@
                         </a>
                         <div class="">
                             <p class="course-name">
-                                <small class="text-muted">参与人数<span> 111 </span></small>
+                                <small class="text-muted"><span> 简介</span></small>
                             </p>
                         </div>
                     </div>
@@ -110,13 +138,13 @@
                         <div class="">
 
                             <p class="course-name">
-                                <small class="text-muted">参与人数<span> 111 </span></small>
+                                <small class="text-muted"><span> 简介 </span></small>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="stage stage1_3"><span>阶段3：基础知识 </span>
+            <div class="stage stage1_3"><span>阶段3：综合实践 </span>
                 <a href="test.html">
                     <button type="button" style="float: right;margin-top: 10px;" class="btn btn-secondary">阶段测试</button>
                 </a>
@@ -136,7 +164,7 @@
                         <div class="">
 
                             <p class="course-name">
-                                <small class="text-muted">参与人数<span> 111 </span></small>
+                                <small class="text-muted"><span> 简介 </span></small>
                             </p>
                         </div>
                     </div>
@@ -191,24 +219,116 @@
     <div class="textarea">
         <textarea class="form-control" rows="3" id="textarea" placeholder="请发表评论"></textarea>
     </div>
-    <div style="height: 63px;padding-right: 46px;">
+    <div style="height: 63px;padding-right: 150px;">
         <button type="button" style="float: right;margin-top: 10px;" class="btn btn-secondary" onclick="remark()">发表评论
         </button>
     </div>
 
     <div class="">
+        <ul class="nav nav-tabs question-types" role="tablist" style="width: 78%; margin: 0 auto;">
+            <li role="presentation" class="active">
+                <a aria-controls="all" role="tab" toggle="tab">最新评论</a>
+            </li>
+
+            <div id="discusslabel"> </div>
+        </ul>
         <div class="conmment">
-        <div class="media text-muted pt-3">
-            <img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <strong class="d-block text-gray-dark"><a href="#">兔子</a></strong>
-                <small class="d-block ">评论内容叭叭叭叭</small>
-                <span>15:50</span>
-                <span style="float: right;cursor: pointer;" onclick="response(this)">
-             <a href="#textarea">回复</a>
-             </span>
-            </p>
-        </div>
+
+        <!--<div class="media text-muted pt-3">-->
+            <!--<img data-src="holder.js/32x32?theme=thumb&bg=6f42c1&fg=6f42c1&size=1" alt="" class="mr-2 rounded">-->
+            <!--<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">-->
+                <!--<strong class="d-block text-gray-dark"><a href="#">兔子</a></strong>-->
+                <!--<small class="d-block ">评论内容叭叭叭叭</small>-->
+                <!--<span>15:50</span>-->
+                <!--<span style="float: right;cursor: pointer;" onclick="response(this)">-->
+             <!--<a href="#textarea">回复</a>-->
+             <!--</span>-->
+            <!--</p>-->
+        <!--</div>-->
+
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active">
+                    <ul class="row question-items">
+
+                        <!--<div id="discusslist"></div>-->
+
+                        <li class="question-item" id="bigData" style="width:100%">
+                            <div class="col-md-10">
+                                <div class="col-sm-1 ">
+                                    <div class="user-avatar ">
+                                        <a class="avatar" target="_blank">
+                                            <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4058086101,2165125838&fm=27&gp=0.jpg">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-11">
+                                    <h4>
+                                        <div id="question10">
+                                            <a class="question-item-title" target="_blank">
+
+                                                这只兔子有点好笑
+
+                                            </a>
+                                        </div>
+                                    </h4>
+                                    <p>hdhdhdhdh</p>
+                                    <div class="question-item-summary">
+
+
+                                        <span class="question-item-date">3小时前</span>
+                                        <a href="#textarea">回复</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <nav class="pagination-container">
+                        <ul class="pagination">
+
+                            <li class="disabled">
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">上一页</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="/questions/?sort=newest&amp;page=1&amp;area_type=all">1</a>
+                            </li>
+                            <li class="">
+                                <a href="/questions/?sort=newest&amp;page=2&amp;area_type=all">2</a>
+                            </li>
+                            <li class="">
+                                <a href="/questions/?sort=newest&amp;page=3&amp;area_type=all">3</a>
+                            </li>
+                            <li class="">
+                                <a href="/questions/?sort=newest&amp;page=4&amp;area_type=all">4</a>
+                            </li>
+                            <li class="">
+                                <a href="/questions/?sort=newest&amp;page=5&amp;area_type=all">5</a>
+                            </li>
+                            <li>
+                                <a href='#'>...</a>
+                            </li>
+                            <li class="">
+                                <a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>
+                            </li>
+                            <li class="">
+                                <a href="/questions/?sort=newest&amp;page=548&amp;area_type=all">548</a>
+                            </li>
+                            <li class="">
+                                <a aria-label="Next" href="/questions/?sort=newest&amp;page=2&amp;area_type=all">
+                                    <span aria-hidden="true">下一页</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
         </div>
 
 
@@ -220,6 +340,51 @@
 
 
 </main>
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 clearfix footer-col">
+                <img src="image/lou-level.png">
+                <div class="footer-slogan">欢迎来到知客！</div>
+
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">公司</div>
+                <a href="../aboutus/index.html" target="_blank">关于我们</a><br>
+                <a href="../contact/index.html" target="_blank">联系我们</a><br>
+                <a href="http://www.simplecloud.cn/jobs.html" target="_blank">加入我们</a><br>
+                <a href="https://blog.shiyanlou.com" target="_blank">技术博客</a><br>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">合作</div>
+                <a href="../contribute/index.html" target="_blank">我要投稿</a><br>
+                <a href="../labs/index.html" target="_blank">教师合作</a><br>
+                <a href="../edu/index.html" target="_blank">高校合作</a><br>
+                <a href="../friends/index.html" target="_blank">友情链接</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">服务</div>
+                <a href="../bootcamp/index.html" target="_blank">实战训练营</a><br>
+                <a href="../vip/index.html" target="_blank">会员服务</a><br>
+                <a href="../courses/reports/index.html" target="_blank">实验报告</a><br>
+                <a href="index.html?tag=%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" target="_blank">常见问题</a><br>
+                <a href="../privacy/index.html" target="_blank">隐私条款</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2 footer-col">
+                <div class="col-title">学习路径</div>
+                <a href="../paths/python/index.html" target="_blank">Python学习路径</a><br>
+                <a href="../paths/linuxdev/index.html" target="_blank">Linux学习路径</a><br>
+                <a href="../paths/bigdata/index.html" target="_blank">大数据学习路径</a><br>
+                <a href="../paths/java/index.html" target="_blank">Java学习路径</a><br>
+                <a href="../paths/php/index.html" target="_blank">PHP学习路径</a><br>
+                <a href="../paths/index.html" , target="_blank">全部</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <script>
 
 </script>
