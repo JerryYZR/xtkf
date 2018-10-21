@@ -420,28 +420,59 @@
                 "yzr" + '</a><span class="user-level">L234</span></div></span>' +
                 '<div class="answer-content markdown-body"><text >' +
                 quest.responseJSON[i].context + '</text></div><div><span class="create-time">' +
-                 "2018.10.17" + '</span><hr/></div></div></div></li>';
+                 "2018.10.17" + '</span><hr/></div>'+
+                '<a class="replyToOne" style="border-right: hidden;color: deepskyblue;">回复</a>'+
+                '</div></div></li>';
         }
         document.getElementById("replylist").innerHTML = coursetmp;
+
     });
 
-    //提交回复
-    $("#submit").click(function () {
-        var replycontent = $("#input-reply").val();
-        var submitformdata = new FormData();
-        submitformdata.append("context", replycontent);
 
-        $("#input-reply").text("");
-        // document.getElementById("submit-reply").style.display = "none";
+    //点击回复按钮加载回复框和按钮
+    $(".replyToOne").click(function(){
+        $(this).after('<div class="replyContent">'+
+            '<textarea class="replytext" rows="2" placeholder="回复内容" style="width: 500px; float:left;">'+
+            '</textarea><button type="button" class="quxiao" class="quxiao" style="width: 50px;">'+
+            '取消</button>'+
+            '</textarea><button type="button" class="submit-question btn btn-primary" style="width: 50px;">'+
+            '提交</button></div>');
+
+    });
+    //取消按钮删除添加的回复框
+    $(document).on("click",".quxiao",function(){
+        $("div .replyContent").remove();
+    });
+
+    //提交按钮提交回复
+    $(document).on("click",".btn-primary",function(){
+        //可以获取文本框内容
+        var replycontent=$(".replytext").val();
+
+        var submitformdata=new FormData();
+        submitformdata.append("userId",userId);
+        submitformdata.append("questionId",questionId)
+        submitformdata.append("replycontent",replycontent);
         getResponse("/addReply", submitformdata, "multipart/form-data", "post");
-    })
+    });
+
+//    //提交回复
+//    $("#submit").click(function () {
+//        var replycontent = $("#input-reply").val();
+//        var submitformdata = new FormData();
+//        submitformdata.append("context", replycontent);
+//        $("#input-reply").text("");
+//        // document.getElementById("submit-reply").style.display = "none";
+//        getResponse("/addReply", submitformdata, "multipart/form-data", "post");
+//    });
+
     //提问按钮点击事件
     $("#showReplyPanel").click(function () {
         document.getElementById("submit-reply").style.display = "block";
-    })
+    });
     $("#hideInput").click(function () {
         document.getElementById("submit-reply").style.display = "none";
-    })
+    });
 </script>
 
 </body>
