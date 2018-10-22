@@ -1,6 +1,7 @@
 package com.zjgsu.studyweb.controller;
 
 import com.zjgsu.studyweb.entity.Discuss;
+import com.zjgsu.studyweb.entity.DiscussUser;
 import com.zjgsu.studyweb.service.DiscussService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -76,5 +77,10 @@ public class DiscussController {
     @RequestMapping(value = "/discuss/discussesbyhot", method = RequestMethod.POST)
     public List<Discuss> getHotDiscuss() {
         return discussService.getHotDiscuss();
+    }
+
+    @RequestMapping(value = "/discuss/findbyid/{did}",method = RequestMethod.POST)
+    public DiscussUser getPathByKey(@PathVariable Integer did){
+        return discussService.findbydid(did);
     }
 }

@@ -100,4 +100,14 @@ public class PathService {
         queryWrapper.last("limit 5");
         return pathMapper.selectList(queryWrapper);
     }
+
+    public List<Path> findPathByKey(String key) {
+        QueryWrapper<Path> queryWrapper=new QueryWrapper<>();
+        queryWrapper.like("name",key);
+        List<Path> paths=pathMapper.selectList(queryWrapper);
+        if(paths.size()==0){
+            paths=pathMapper.selectList(null);
+        }
+        return paths;
+    }
 }

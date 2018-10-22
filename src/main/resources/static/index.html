@@ -60,10 +60,10 @@
                 <h2>假装这里是知识互换平台logo</h2>
             </div>
 
-            <div class="hd-search-right am-hide-md-down">
+            <div class="hd-search-right ">
                 <div class="hd-search-right-input">
-                    <input type="text" name="name" value="" placeholder="搜索 课程/路径" onclick="search()" id="key"/>
-                    <button class="font am-show-md-down">&#xe634;</button>
+                    <input type="text" name="name" value="" placeholder="搜索 课程/路径" id="key"/>
+                    <button class="btn btn-primary" type="submit"onclick="search()">搜索</button>
                 </div>
                 <div class="hd-search-right-keyword">
                     <a href="#">java</a>
@@ -92,7 +92,7 @@
                     <li><a href="path.html">路径</a></li>
                     <li><a href="discusses.html">论坛</a></li>
                     <!--<li><a href="#">课程</a></li>-->
-                    <li><a href="user.html">个人主页</a></li>
+                    <li><a onclick="myindex()">个人主页</a></li>
                 </ul>
             </div>
         </div>
@@ -154,6 +154,9 @@
 
                 </div>
             </div>
+
+            <!--热门课程注释-->
+
             <div class="right_box">
                 <h3 class="feed_new_tit">
                     <span class="line"></span><a class="txt">热门课程</a>
@@ -195,7 +198,7 @@
         document.getElementById("userinfo").innerHTML=tmp;
     }
     else{
-        tmp+='<a href="">欢迎！ '+user.username+'</a> <a href="login.html">退出</a>';
+        tmp+='<a href="">欢迎！ '+user.username+'</a> <a onclick="loginout()">退出</a>';
         document.getElementById("userinfo").innerHTML=tmp;
     }
 
@@ -206,14 +209,17 @@
     var re=getResponse("/path/getPathList");
     var coursetmp='';
     for(var i=0;i<re.responseJSON.length;i++){
-        coursetmp+='<li><a href="#">'+re.responseJSON[i].name+'</a></li>'; //url 地址 还未赋值
+        coursetmp+='<li><a href="definite_path.html?id='+re.responseJSON[i].id+'">'+re.responseJSON[i].name+'</a></li>'; //url 地址 还未赋值
     }
     document.getElementById("courselist").innerHTML=coursetmp;
 
     /**
      * 退出
      */
-
+    function loginout() {
+        sessionStorage.setItem("user",null);
+        window.location.href="login.html";
+    }
 
 
     /**
@@ -221,7 +227,9 @@
      */
     function show_discuss() {
         var re = getResponse("/discuss/discussesbyhot");
+//        var alldiscuss = getResponse("/discusses", "multipart/form-data", "get");
         var discusstmp = '';
+        console.log(re);
         for (var i = 0; i < re.responseJSON.length; i++) {
             discusstmp += '<li class="question-item" id=' + i + '>'
                     +'<div class="row">'
@@ -229,32 +237,17 @@
                     +'<div class="row">'
                 + '<div class="col-sm-2 question-item-author">'
                 + '<div class="user-avatar ">'
-                + '<a class="avatar" href="user/13/study.html" target="_blank">'  //个人主页
+                + '<a class="avatar" onclick="question()" target="_blank">'  //个人主页
                 + '<img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">'
                 + '</a>'
                 + '</div>'
                 + '</div>'
                 + '<div class="col-sm-10">'
-                + '<h4><a class="question-item-title" href="show.html" target="_blank">' + re.responseJSON[i].name + '+</a></h4>'   //组名
-                + '<div class="question-item-summary">'
-                + '<div class="user-username ">'
-                + '<span class="question-item-date">成员数：30人'    //人数
-                + '</div>'
-                + '<span class="question-item-date">3小时前</span>最后回复'
-                + '<span class="question-item-date">'
-                + '<div class="user-username ">'
-                + '<a class="username" href="/user/256544" target="_blank">芃逆明</a>'
-                + '<span class="user-level">L38</span>'
-                + '</div>'
-                + '</span>'
-                    +'</div>'
+                + '<h4><a class="question-item-title" onclick="question('+re.responseJSON[i].id+')" target="_blank">' + re.responseJSON[i].name + '</a></h4>'   //组名
+
                 + '</div>'
                 + '</div>'
-                + '</div>'
-                + '<div class="col-md-2 question-item-rank">'
-                + '<div class="question-item-answered">'
-                + '</div>'
-                + '</div>'
+
                     +'</div>'
                 + '</li>';
         }
@@ -270,7 +263,7 @@
         var re = getResponse("/path/getHotPathList");
         var pathtmp = '';
         for (var i = 0; i < re.responseJSON.length; i++) {
-                pathtmp+='<a href="/paths/python"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25">'+re.responseJSON[i].name+'</a>';
+                pathtmp+='<a href="definite_path.html?id='+re.responseJSON[i].id+'"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25">'+re.responseJSON[i].name+'</a>';
         }
         document.getElementById("pathtmp").innerHTML=pathtmp;
     }
@@ -284,7 +277,7 @@
         var re = getResponse("/course/getHotCourseList",null,null,"post");
         var coursetmp = '';
         for (var i = 0; i < re.responseJSON.length; i++) {
-            coursetmp+='<a href="/paths/python"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25">'+re.responseJSON[i].name+'</a>';
+            coursetmp+='<a href="#"><img style="width:25px;height:25px" src="https://dn-simplecloud.shiyanlou.com/1471513769430.png?imageView/1/w/25/h/25">'+re.responseJSON[i].name+'</a>';
         }
         document.getElementById("coursetmp").innerHTML=coursetmp;
     }
@@ -295,10 +288,35 @@
      */
     function search(){
         var key=document.getElementById("key").value;
+        window.location.href = "path_search.html?key="+key;
+    }
+
+    function question(did){
+        //location.href = "questions.html?" + "userId=" + userId + "&discussId=" + discussId;
+        var re = getResponse("/discuss/findbyid/"+did);
+        console.log(re);
+        if(re.responseJSON!=null)
+            location.href = "questions.html?" + "userId=" + re.responseJSON.userId + "&discussId=" + re.responseJSON.discussId;
+        else
+            location.href="questions.html";
 
     }
 
+    /**
+     * 个人主页
+     *
+     */
+    function myindex(){
+        //var re = getResponse("/discuss/findbyid/"+did);
+        if(user==null) {
+            alert("请登录！");
+            location.href = "login.html";
+        }
+       else
+           location.href="user.html";
 
+
+    }
 </script>
 
 </body>

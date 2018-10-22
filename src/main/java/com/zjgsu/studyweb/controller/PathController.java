@@ -51,4 +51,14 @@ public class PathController {
     List<Path> findAll(){
         return pathService.findAll();
     }
+
+    /**
+     * 根据关键字搜索,若搜索内容为空，显示全部
+     * @return
+     */
+    @RequestMapping(value = "/path_search/{key}",method = RequestMethod.GET)
+    public List<Path> getPathByKey(@PathVariable String key){
+        return pathService.findPathByKey(key);
+    }
+
 }

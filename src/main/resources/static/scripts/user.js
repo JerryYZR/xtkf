@@ -1,7 +1,8 @@
 
 
 function getDiscussByUserId() {
-    var userId = 1;
+    var user= JSON.parse(sessionStorage.getItem("user"));
+    var userId = user.id;
     var nav = [{"id":"nav_course", "name":"课程", "content_id":"courses"},
         {"id":"nav_path", "name":"路径", "content_id":"paths"},
         {"id":"nav_discuss", "name":"讨论", "content_id":"discusses"}]

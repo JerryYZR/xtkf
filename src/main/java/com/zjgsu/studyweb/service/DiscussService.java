@@ -99,4 +99,10 @@ public class DiscussService {
         queryWrapper.last("limit 8");
         return discussMapper.selectList(queryWrapper);
     }
+
+    public DiscussUser findbydid(Integer did) {
+        QueryWrapper<DiscussUser> queryWrapper=new QueryWrapper<>();
+        queryWrapper.last("and discussId = "+did);
+        return discussUserMapper.selectOne(queryWrapper);
+    }
 }
