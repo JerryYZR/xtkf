@@ -207,7 +207,6 @@
 
         <div class="col-md-3 layout-side">
             <a class="btn side-btn" data-toggle="modal" data-target="#askquestion" id="showReplyPanel">回复</a>
-
             <div class="panel panel-default panel-userinfo">
                 <div class="panel-body body-userinfo">
                     <div class="media userinfo-header">
@@ -242,21 +241,25 @@
                 </div>
                 <div id="dalaolist"></div>
 
+
+                <!--<div class="textarea">-->
+                <!--<textarea class="form-control" rows="3" id="input-question-content" placeholder="问题内容"></textarea>-->
+                <!--</div>-->
+        </div>
+
+
             <div class="panel panel-default panel-userinfo" id="submit-reply" style="display: none;">
 
-                <h4>回复</h4><br />
-                <input type="text" style="width: 250px; height:40px;" id="input-reply" /><br />
-                <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput"
-                        style="width: 50px;">取消</button>
-                <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit"
-                        style="width: 50px;">提交</button>
+                <h4 style="margin-left: 10px;">回复</h4>
+                <input type="text" style="width: 250px; height:40px;margin-left: 10px;" id="input-reply" />
+                <br/>
+                <div>
+                    <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="hideInput"
+                            style="width: 50px;margin-top: 10px;margin-left: 10px;margin-bottom: 10px;">取消</button>
+                    <button type="button" class="submit-question btn btn-primary" data-dismiss="modal" id="submit"
+                            style="width: 50px;margin-left: 10px;margin-top: 10px;margin-bottom: 10px;">提交</button>
+                </div>
             </div>
-
-            <!--<div class="textarea">-->
-                <!--<textarea class="form-control" rows="3" id="input-question-content" placeholder="问题内容"></textarea>-->
-            <!--</div>-->
-
-        </div>
     </div>
 </div>
 
@@ -496,6 +499,8 @@
         submitformdata.append("reply_to_user_id", replyUserId);
         console.log(replyUserId)
         getResponse("/addReply", submitformdata, "multipart/form-data", "post");
+        $("div .replyContent").remove();
+        countReplyArea--;
     });
 
    //提交回复
@@ -507,6 +512,7 @@
        $("#input-reply").text("");
        // document.getElementById("submit-reply").style.display = "none";
        getResponse("/addReply", submitformdata, "multipart/form-data", "post");
+       document.getElementById("submit-reply").style.display = "none";
    });
 
     //提问按钮点击事件
